@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.62703353, g: 0.7086391, b: 0.748226, a: 1}
+  m_IndirectSpecularColor: {r: 0.62703353, g: 0.7086395, b: 0.7482275, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11567,7 +11567,7 @@ PrefabInstance:
     - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
         type: 3}
       propertyPath: meleeAttackRange
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
         type: 3}
@@ -13961,9 +13961,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1919348749}
     m_Modifications:
+    - target: {fileID: 100000, guid: 263dc3e774e34a54f8e1214aafc1a5a1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 263dc3e774e34a54f8e1214aafc1a5a1, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: 263dc3e774e34a54f8e1214aafc1a5a1, type: 3}
       propertyPath: m_Name
       value: Bridge_Damage
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 263dc3e774e34a54f8e1214aafc1a5a1, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: 263dc3e774e34a54f8e1214aafc1a5a1, type: 3}
       propertyPath: m_RootOrder
