@@ -7,6 +7,7 @@ public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
 
+    public Player playerGO;
     public Transform player;
 
     public LayerMask whatIsGround, whatIsPlayer;
@@ -53,7 +54,7 @@ public class EnemyAI : MonoBehaviour
             ChasePlayer();
         }
 
-        if (playerInAttackRange&& playerInSightRange)
+        if (playerInAttackRange && playerInSightRange)
         {
             AttackPlayer();
         }
@@ -116,9 +117,16 @@ public class EnemyAI : MonoBehaviour
 
 
             alreadyAttacked = true;
+            dealDamage(5);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
 
+    }
+
+    // Damaging player
+    private void dealDamage(int damage)
+    {
+        playerGO.TakeDamage(damage);
     }
 
     private void ResetAttack()

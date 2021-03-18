@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public HealthBar healthBar;
+    public int maxHealth = 100;
+    public int currentHealth;
+
     public float moveSpeed;
 
     public Rigidbody rig;
@@ -27,6 +31,15 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        // Sets health to max when level starts
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
     }
 
     void Jump2()

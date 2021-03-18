@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.62703353, g: 0.7086395, b: 0.7482275, a: 1}
+  m_IndirectSpecularColor: {r: 0.62703353, g: 0.7086391, b: 0.748226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -11551,6 +11551,11 @@ PrefabInstance:
       objectReference: {fileID: 651825156}
     - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
         type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 1402552198}
+    - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
+        type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 110923971}
@@ -14391,8 +14396,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.9543457, y: 0}
-  m_SizeDelta: {x: 1.9086914, y: 0}
+  m_AnchoredPosition: {x: -0.008056641, y: 0}
+  m_SizeDelta: {x: 0.016174316, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &548896497
 MonoBehaviour:
@@ -25499,6 +25504,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffa4d200e6c7d9c4b90b3764b7ed86d4, type: 3}
+--- !u!114 &995913433 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
+    type: 3}
+  m_PrefabInstance: {fileID: 447461202}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17ddb6c36eab80d4b8a80a34ceaeefee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &995968814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29245,6 +29262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1125596182}
+  playerGO: {fileID: 995913433}
   player: {fileID: 1329010708}
   whatIsGround:
     serializedVersion: 2
@@ -29256,7 +29274,7 @@ MonoBehaviour:
   walkPointRange: 5
   timeBetweenAttacks: 0.5
   sightRange: 10
-  attackRange: 0
+  attackRange: 1
   playerInSightRange: 0
   playerInAttackRange: 0
   health: 100
@@ -35807,6 +35825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1305598578}
+  playerGO: {fileID: 995913433}
   player: {fileID: 1329010708}
   whatIsGround:
     serializedVersion: 2
@@ -35818,7 +35837,7 @@ MonoBehaviour:
   walkPointRange: 5
   timeBetweenAttacks: 0.5
   sightRange: 10
-  attackRange: 0
+  attackRange: 1
   playerInSightRange: 0
   playerInAttackRange: 0
   health: 100
@@ -38782,6 +38801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1391385453}
+  playerGO: {fileID: 995913433}
   player: {fileID: 1329010708}
   whatIsGround:
     serializedVersion: 2
@@ -38793,7 +38813,7 @@ MonoBehaviour:
   walkPointRange: 5
   timeBetweenAttacks: 0.5
   sightRange: 10
-  attackRange: 0
+  attackRange: 1
   playerInSightRange: 0
   playerInAttackRange: 0
   health: 100
@@ -39292,6 +39312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1402552196}
   - component: {fileID: 1402552197}
+  - component: {fileID: 1402552198}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -39371,6 +39392,49 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1402552198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402552195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6d1681fa49b7e4889d6ba3523c8257, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1402552197}
+  gradient:
+    serializedVersion: 2
+    key0: {r: 0.93725497, g: 0.058823533, b: 0.11764707, a: 1}
+    key1: {r: 1, g: 0.8740617, b: 0.103773594, a: 1}
+    key2: {r: 0.43865764, g: 1, b: 0.2830189, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 16384
+    ctime1: 32768
+    ctime2: 65535
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 1
+    m_NumColorKeys: 3
+    m_NumAlphaKeys: 2
+  fill: {fileID: 548896497}
 --- !u!1001 &1405033650
 PrefabInstance:
   m_ObjectHideFlags: 0
