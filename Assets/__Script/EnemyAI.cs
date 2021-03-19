@@ -7,8 +7,9 @@ public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent;
 
-    public Player playerGO;
-    public Transform player;
+    public Player player;
+    public GameObject playerGO;
+    public Transform playerTransform;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -28,7 +29,9 @@ public class EnemyAI : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.Find("Player").transform;
+        playerGO = GameObject.Find("Player");
+        playerTransform = GameObject.Find("Player").transform;
+        player = playerGO.GetComponent<Player>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -99,14 +102,14 @@ public class EnemyAI : MonoBehaviour
 
     private void ChasePlayer()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(playerTransform.position);
     }
 
     private void AttackPlayer()
     {
         agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+        transform.LookAt(playerTransform);
 
         if (!alreadyAttacked)
         {
@@ -126,7 +129,7 @@ public class EnemyAI : MonoBehaviour
     // Damaging player
     private void dealDamage(int damage)
     {
-        playerGO.TakeDamage(damage);
+        player.TakeDamage(damage);
     }
 
     private void ResetAttack()
