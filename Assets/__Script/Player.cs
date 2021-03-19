@@ -89,6 +89,7 @@ public class Player : MonoBehaviour
 
     private void DoAttack()
     {
+        
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit, myWeapon.attackDamage))
@@ -104,7 +105,7 @@ public class Player : MonoBehaviour
     private void DoMeleeAttack()
     {
         playerInMeleeAttackRange = Physics.CheckSphere(transform.position, meleeAttackRange, whatIsEnemy);
-
+        
         if (playerInMeleeAttackRange)
         {
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -114,7 +115,7 @@ public class Player : MonoBehaviour
             {
                 if (hit.collider.tag == "Enemy")
                 {
-                    EnemyFollow ehealth = hit.collider.GetComponent<EnemyFollow>();
+                    EnemyAI ehealth = hit.collider.GetComponent<EnemyAI>();
                     ehealth.TakeDamage(myWeapon.attackDamage);
                 }
             }

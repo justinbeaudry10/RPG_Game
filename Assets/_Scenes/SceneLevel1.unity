@@ -11561,6 +11561,11 @@ PrefabInstance:
       objectReference: {fileID: 1402552198}
     - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
         type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
+        type: 3}
       propertyPath: groundCheck
       value: 
       objectReference: {fileID: 110923971}
@@ -16976,7 +16981,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 25
   attackRange: 2
-  attackCoolDown: 5
+  attackCoolDown: 1
 --- !u!1001 &653538661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29226,7 +29231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1125596180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29258,6 +29263,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerGO: {fileID: 0}
   playerTransform: {fileID: 0}
+  damage: 25
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -38610,7 +38616,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1391385451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38642,6 +38648,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerGO: {fileID: 0}
   playerTransform: {fileID: 0}
+  damage: 25
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -59294,6 +59301,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1329010708}
+    - target: {fileID: 655388726181300586, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 655388726181300586, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
         type: 3}
       propertyPath: player
