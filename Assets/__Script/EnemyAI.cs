@@ -11,6 +11,8 @@ public class EnemyAI : MonoBehaviour
     public GameObject playerGO;
     public Transform playerTransform;
 
+    public int damage = 25;
+
     public LayerMask whatIsGround, whatIsPlayer;
 
     public Vector3 walkPoint;
@@ -120,7 +122,7 @@ public class EnemyAI : MonoBehaviour
 
 
             alreadyAttacked = true;
-            dealDamage(5);
+            dealDamage(damage);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
 

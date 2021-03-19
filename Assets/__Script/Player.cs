@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -40,6 +41,18 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        // If dead, respawn will full health
+        if(currentHealth <= 0)
+        {
+            Invoke("Respawn", 3f);
+        }
+    }
+
+    private void Respawn()
+    {
+        currentHealth = maxHealth;
+        healthBar.SetHealth(maxHealth);
+        SceneManager.LoadScene("SceneLevel1");
     }
 
     void Jump2()
