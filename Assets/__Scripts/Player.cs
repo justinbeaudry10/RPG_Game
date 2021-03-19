@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
     public HealthBar healthBar;
     public ExpBar expBar;
+    public TextMeshProUGUI levelText;
     public int maxHealth = 100;
     public int maxExp = 5;
     public int currentHealth;
@@ -131,14 +133,17 @@ public class Player : MonoBehaviour
     public void gainExp(int exp)
     {
         currentExp += exp;
-        expBar.setExp(currentExp);
         
-        if(currentExp > maxExp)
+        if (currentExp > maxExp)
         {
+            int extraExp = currentExp - maxExp;
             currentLevel++;
-            currentExp = 0;
+            currentExp = extraExp;
             expBar.setMaxExp(maxExp);
         }
+
+        expBar.setExp(currentExp);
+        levelText.text = "Level " + currentLevel.ToString();
     }
 
     void Move()
