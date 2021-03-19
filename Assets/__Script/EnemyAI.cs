@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour
     public Transform playerTransform;
 
     public int damage = 25;
+    public int expValue = 3;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -142,7 +143,7 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        print(health);
+        
         if (health<=0)
         {
             Invoke("DestroyEnemy", 0.5f);
@@ -152,6 +153,7 @@ public class EnemyAI : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        player.gainExp(expValue);
         Destroy(gameObject);
     }
 

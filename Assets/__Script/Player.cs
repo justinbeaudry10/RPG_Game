@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     public HealthBar healthBar;
+    public ExpBar expBar;
     public int maxHealth = 100;
+    public int maxExp = 5;
     public int currentHealth;
+    public int currentExp;
+    public int currentLevel = 1;
 
     public float moveSpeed;
 
@@ -34,7 +38,9 @@ public class Player : MonoBehaviour
     {
         // Sets health to max when level starts
         currentHealth = maxHealth;
+        currentExp = 0;
         healthBar.SetMaxHealth(maxHealth);
+        expBar.setMaxExp(maxExp);
     }
 
     public void TakeDamage(int damage)
@@ -122,6 +128,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void gainExp(int exp)
+    {
+        currentExp += exp;
+        expBar.setExp(currentExp);
+        
+        if(currentExp > maxExp)
+        {
+            currentLevel++;
+            currentExp = 0;
+            expBar.setMaxExp(maxExp);
+        }
+    }
+
     void Move()
     {
         float x = Input.GetAxis("Horizontal");
@@ -134,6 +153,7 @@ public class Player : MonoBehaviour
         rig.velocity = dir;
 
     }
+
     /*void Jump()
     {
         if (CanJump())

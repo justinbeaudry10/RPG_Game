@@ -11563,6 +11563,11 @@ PrefabInstance:
       objectReference: {fileID: 651825151}
     - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
         type: 3}
+      propertyPath: expBar
+      value: 
+      objectReference: {fileID: 1330043674}
+    - target: {fileID: 8184512793794034411, guid: 55900a8f71eb05948bf37f79d4368f5b,
+        type: 3}
       propertyPath: myWeapon
       value: 
       objectReference: {fileID: 651825156}
@@ -13168,6 +13173,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 949825771}
     m_Modifications:
+    - target: {fileID: 655388726181300586, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
+        type: 3}
+      propertyPath: expValue
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 655388726181300587, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
         type: 3}
       propertyPath: m_RootOrder
@@ -36295,6 +36305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1330043672}
   - component: {fileID: 1330043673}
+  - component: {fileID: 1330043674}
   m_Layer: 5
   m_Name: ExperienceBar
   m_TagString: Untagged
@@ -36373,6 +36384,20 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1330043674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330043671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13e8dc41109477a419b571c6f8247762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1330043673}
+  fill: {fileID: 620572413}
 --- !u!1001 &1330225945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57590,6 +57615,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 949825771}
     m_Modifications:
+    - target: {fileID: 655388726181300586, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
+        type: 3}
+      propertyPath: expValue
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 655388726181300587, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
         type: 3}
       propertyPath: m_RootOrder
@@ -59154,6 +59184,11 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 655388726181300586, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
+        type: 3}
+      propertyPath: expValue
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 655388726181300586, guid: 4cec37991128c684ca4ebdc97ffe4ea0,
         type: 3}
