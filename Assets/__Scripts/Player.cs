@@ -8,11 +8,10 @@ public class Player : MonoBehaviour
 {
     public HealthBar healthBar;
     public ExpBar expBar;
-    public TextMeshProUGUI levelText;
+    public TextMeshProUGUI healthText, levelText;
     public int maxHealth = 100;
     public int maxExp = 5;
-    public int currentHealth;
-    public int currentExp;
+    public int currentHealth, currentExp;
     public int currentLevel = 1;
 
     public float moveSpeed;
@@ -49,6 +48,7 @@ public class Player : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        
         // If dead, respawn will full health
         if(currentHealth <= 0)
         {
@@ -75,6 +75,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        healthText.text = currentHealth.ToString();
         attackTimer += Time.deltaTime;
 
         Move();   

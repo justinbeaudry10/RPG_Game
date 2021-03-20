@@ -11,7 +11,7 @@ public class EnemyAI : MonoBehaviour
     public GameObject playerGO;
     public Transform playerTransform;
 
-    public int damage = 25;
+    public int damage = 10;
     public int expValue = 3;
 
     public LayerMask whatIsGround, whatIsPlayer;
