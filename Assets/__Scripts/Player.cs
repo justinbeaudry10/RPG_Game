@@ -35,6 +35,10 @@ public class Player : MonoBehaviour
     public bool playerInMeleeAttackRange;
     public LayerMask whatIsEnemy;
 
+    public bool gunPicked = false;
+    public GameObject playerProjectile;
+    public GameObject handGun;
+
 
     private void Start()
     {
@@ -53,6 +57,7 @@ public class Player : MonoBehaviour
         // If dead, respawn will full health
         if(currentHealth <= 0)
         {
+            currentHealth = 0;
             Invoke("Respawn", 3f);
         }
     }
@@ -79,7 +84,7 @@ public class Player : MonoBehaviour
         healthText.text = currentHealth.ToString();
         attackTimer += Time.deltaTime;
 
-        Move();   
+        Move();
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -87,13 +92,26 @@ public class Player : MonoBehaviour
 
         }
 
-        if (Input.GetMouseButtonUp(0) && attackTimer>=myWeapon.attackCoolDown)
+
+        if (Input.GetMouseButtonUp(0) && attackTimer >= myWeapon.attackCoolDown)
         {
 
 
             //DoAttack();
             DoMeleeAttack();
         }
+
+        if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown)
+        {
+
+
+            shoot();
+        }
+
+
+
+
+
 
     }
 
@@ -132,8 +150,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void shoot(){
-       
+    private void shoot()
+    {
+        Instantiate(playerProjectile, transform.position, Quaternion.identity);
+
+        /*Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        position = Camera.main.ScreenToWorldPoint(position);
+        GameObject go = Instantiate(playerProjectile, transform.position, Quaternion.identity);
+        go.transform.LookAt(position);
+        Debug.Log(position);
+        //go.rigidbody.AddForce(go.transform.forward * 1000);
+        Rigidbody rb = go.GetComponent<Rigidbody>();
+        rb.AddForce(go.transform.forward * 1000);*/
+
     }
 
     public void gainExp(int exp)
