@@ -5,28 +5,18 @@ using UnityEngine;
 public class Projectile2 : MonoBehaviour
 {
     public float speed;
-    public int bulletDamage = 5;
 
-    private Player player;
-    private GameObject playerGO;
-    private Transform playerTransform;
+    private Transform player;
     private Vector3 target;
-
-    private void Awake()
-    {
-        playerTransform = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
-        playerGO = GameObject.Find("Player");
-        player = playerGO.GetComponent<Player>();
-
-    }
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
 
-        target = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
+        target = new Vector3(player.position.x, player.position.y, player.position.z);
 
-        transform.LookAt(playerTransform.position);
+        transform.LookAt(player.position);
 
     }
 
@@ -44,22 +34,19 @@ public class Projectile2 : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         print("Collision");
-
         Destroy(gameObject);
     }
 
-    
     private void OnTriggerEnter(Collider other)
     {
-        // When bullet hits player
         if (other.CompareTag("Player") || other.CompareTag("PlayerEyes"))
         {
-            print(other);
-            player.TakeDamage(bulletDamage);
+            print("Hit player");
             Destroy(gameObject);
         }
         else
         {
+            print("Trigger");
             Destroy(gameObject);
         }
 
