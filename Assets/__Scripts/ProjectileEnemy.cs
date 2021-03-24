@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile2 : MonoBehaviour
+public class ProjectileEnemy : MonoBehaviour
 {
     public float speed;
 
