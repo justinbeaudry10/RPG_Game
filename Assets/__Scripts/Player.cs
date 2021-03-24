@@ -38,6 +38,9 @@ public class Player : MonoBehaviour
 
     public bool fireClass = false;
     public bool iceClass = false;
+    public bool shieldClass = false;
+
+    private bool shieldEnabled = false;
 
     private float attackTimer;
 
@@ -90,14 +93,17 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthBar.SetHealth(currentHealth);
-        
-        // If dead, respawn will full health
-        if(currentHealth <= 0)
+        if (!shieldEnabled)
         {
-            currentHealth = 0;
-            Invoke("Respawn", 3f);
+            currentHealth -= damage;
+            healthBar.SetHealth(currentHealth);
+
+            // If dead, respawn will full health
+            if (currentHealth <= 0)
+            {
+                currentHealth = 0;
+                Invoke("Respawn", 3f);
+            }
         }
     }
 
@@ -139,17 +145,22 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown)
         {
-            shoot();
+            Shoot();
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            shootFire();
+            ShootFire();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            shootIce();
+            ShootIce();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            EnableShield();
         }
 
 
@@ -190,12 +201,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void shoot()
+    private void Shoot()
     {
         Instantiate(playerProjectile, transform.position, Camera.main.transform.rotation);
     }
 
-    private void shootFire()
+    private void ShootFire()
     {
         if (fireClass)
         {
@@ -203,12 +214,26 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void shootIce()
+    private void ShootIce()
     {
         if (iceClass)
         {
             Instantiate(iceBullet, transform.position, Camera.main.transform.rotation);
         }
+    }
+
+    private void EnableShield()
+    {
+        if (shieldClass)
+        {
+            shieldEnabled = true;
+            Invoke("DisableShield", 5);
+        }
+    }
+
+    private void DisableShield()
+    {
+        shieldEnabled = false;
     }
 
     public void gainExp(int exp)
