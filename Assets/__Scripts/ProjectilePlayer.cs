@@ -7,6 +7,7 @@ public class ProjectilePlayer : MonoBehaviour
     public float speed;
     public int bulletDamage = 5;
 
+    private EnemyAI enemy;
     private GameObject playerGO;
     private Player player;
     private Transform playerTransform;
@@ -47,7 +48,8 @@ public class ProjectilePlayer : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             print("Hit Enemy");
-            Destroy(other);
+            enemy = other.gameObject.GetComponent<EnemyAI>();
+            enemy.TakeDamage(50);
             Destroy(gameObject);
         }
         else
