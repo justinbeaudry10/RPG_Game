@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public Camera cam;
     public GameObject hand;
     public Weapon myWeapon;
+    public GameObject projectile;
 
     private float attackTimer;
 
@@ -129,6 +130,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void shoot(){
+       
     }
 
     public void gainExp(int exp)
