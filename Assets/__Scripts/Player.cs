@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
 
     private void shoot()
     {
-        Instantiate(playerProjectile, transform.position, Quaternion.identity);
+        Instantiate(playerProjectile, transform.position, transform.rotation);
 
         /*Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
         position = Camera.main.ScreenToWorldPoint(position);

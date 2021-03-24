@@ -12,11 +12,20 @@ public class ProjectilePlayer : MonoBehaviour
     private Transform playerTransform;
     private Vector3 target;
 
+    private void Awake()
+    {
+        playerGO = GameObject.Find("Player");
+        player = playerGO.GetComponent<Player>();
+        playerTransform = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-        transform.LookAt(position);
+        //Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+        //transform.LookAt(position);
+        transform.position += new Vector3(0, 1.5f, 0); ;
+        transform.position += transform.forward * 2;
 
     }
 
@@ -34,6 +43,7 @@ public class ProjectilePlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Hit: " + other);
         if (other.CompareTag("Enemy"))
         {
             print("Hit Enemy");
