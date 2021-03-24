@@ -250,7 +250,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6474328120364344642}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4, y: 0, z: 29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -331,6 +331,7 @@ MonoBehaviour:
   currentHealth: 0
   currentExp: 0
   currentLevel: 1
+  specialBulletCooldown: 5
   moveSpeed: 5
   rig: {fileID: 6474328120364344653}
   jumpForce: 5
@@ -339,6 +340,8 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 256
+  fireClass: 1
+  iceClass: 0
   cam: {fileID: 6474328119132830135}
   hand: {fileID: 6960137688475854918}
   myWeapon: {fileID: 2903788332614531326}
@@ -351,6 +354,10 @@ MonoBehaviour:
     m_Bits: 1024
   gunPicked: 1
   playerProjectile: {fileID: 8983969228486517653, guid: 38e4640bfb65c43fcb07121feadc369c,
+    type: 3}
+  fireBullet: {fileID: 5749906905737019849, guid: a45f2f5bceaecd74793c295ad50d305f,
+    type: 3}
+  iceBullet: {fileID: 2669793610928777350, guid: d191951e68af5194aa9ae29fc525c707,
     type: 3}
   handGun: {fileID: 6416782695981097019, guid: ef89b95b953a70c429c70dcfdcf84ca2, type: 3}
 --- !u!1 &6960137688475854918
@@ -443,7 +450,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 6960137688475854918}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 1
@@ -552,7 +559,7 @@ BoxCollider:
   m_GameObject: {fileID: 7080725910878602472}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}

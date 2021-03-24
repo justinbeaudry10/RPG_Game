@@ -6,6 +6,8 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    static public Player S; // Singleton for player
+
     public HealthBar healthBar;
     public ExpBar expBar;
     public TextMeshProUGUI healthText, levelText;
@@ -46,6 +48,17 @@ public class Player : MonoBehaviour
     public GameObject iceBullet;
     public GameObject handGun;
 
+    private void Awake()
+    {
+        if (S == null)
+        {
+            S = this; // Set the Singleton
+        }
+        else
+        {
+            Debug.LogError("Player.Awake() - Attempted to assign second Player.S!");
+        }
+    }
 
     private void Start()
     {
@@ -90,9 +103,7 @@ public class Player : MonoBehaviour
 
     private void Respawn()
     {
-        currentHealth = maxHealth;
-        healthBar.SetHealth(maxHealth);
-        SceneManager.LoadScene("SceneLevel1");
+        Main.S.Restart();
     }
 
     void Jump2()
