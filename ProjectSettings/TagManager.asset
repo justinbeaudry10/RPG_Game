@@ -8,6 +8,10 @@ TagManager:
   - PlayerEyes
   - PlayerProjectile
   - Weapon
+  - Boundary
+  - ShieldPotion
+  - IcePotion
+  - FirePotion
   layers:
   - Default
   - TransparentFX

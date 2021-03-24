@@ -35,10 +35,10 @@ public class ProjectilePlayer : MonoBehaviour
         transform.position += transform.forward * speed * Time.deltaTime;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         Destroy(gameObject);
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -47,6 +47,11 @@ public class ProjectilePlayer : MonoBehaviour
             enemy = other.gameObject.GetComponent<EnemyAI>();
             enemy.TakeDamage(25);
             Destroy(gameObject);
+        }
+        if (other.CompareTag("Boundary"))
+        {
+            print("Player Projectile Tiggered by wall");
+            Destroy(this.gameObject);
         }
         else
         {

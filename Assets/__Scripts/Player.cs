@@ -274,4 +274,40 @@ public class Player : MonoBehaviour
         Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
     }
 
+    private void OnTriggerEnter(Collider coll)
+    {
+        if (coll.CompareTag("FirePotion"))
+        {
+            print("Player has chosen fire potion");
+            fireClass = true;
+            DestroyPotions();
+        }
+
+        else if (coll.CompareTag("IcePotion"))
+        {
+            print("Player has chosen ice potion");
+            iceClass = true;
+            DestroyPotions();
+        }
+        else if (coll.CompareTag("ShieldPotion"))
+        {
+            print("Player has chosen shield potion");
+            shieldClass = true;
+            DestroyPotions();
+        }
+
+
+    }
+
+    private void DestroyPotions()
+    {
+        GameObject ShieldPotion = GameObject.FindGameObjectWithTag("ShieldPotion");
+        GameObject FirePotion = GameObject.FindGameObjectWithTag("FirePotion");
+        GameObject IcePotion = GameObject.FindGameObjectWithTag("IcePotion");
+
+        Destroy(ShieldPotion);
+        Destroy(FirePotion);
+        Destroy(IcePotion);
+
+    }
 }
