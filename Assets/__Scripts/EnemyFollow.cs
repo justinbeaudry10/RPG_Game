@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +13,7 @@ public class EnemyFollow : MonoBehaviour
     public void TakeDamage(float amnt)
     {
         health -= amnt;
-        if (health<=0)
+        if (health <= 0)
         {
             print("Enemy Died");
             Destroy(gameObject);
@@ -27,7 +27,7 @@ public class EnemyFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
