@@ -13,7 +13,6 @@ public class EnemyShoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //player = GameObject.FindGameObjectWithTag("Player").transform;
 
         timeBetweenShots = startTimeBetweenShots;
     }
@@ -23,7 +22,7 @@ public class EnemyShoot : MonoBehaviour
     {
         if (timeBetweenShots <= 0)
         {
-            Instantiate(projectile, transform.position, Quaternion.identity);
+            Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);
             timeBetweenShots = startTimeBetweenShots;
         }
         else

@@ -26,7 +26,8 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
-    //public GameObject projectile;
+    public bool onFire = false;
+    public bool frozen = false;
 
     public float health;
 
@@ -41,7 +42,7 @@ public class EnemyAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartCoroutine(burn());
     }
 
     // Update is called once per frame
@@ -50,6 +51,7 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
+        
         if (!playerInSightRange && !playerInAttackRange)
         {
             Patroling();
@@ -65,7 +67,23 @@ public class EnemyAI : MonoBehaviour
             AttackPlayer();
         }
 
+    }
 
+    IEnumerator burn()
+    {
+
+        while (true)
+        {
+            if (onFire) {
+                TakeDamage(5);
+                print("On fire");
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
     }
 
     private void Patroling()
@@ -116,12 +134,6 @@ public class EnemyAI : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            //ATTACK CODE HERE
-            //Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            //rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-           // rb.AddForce(transform.up * 8f, ForceMode.Impulse);
-
-
             alreadyAttacked = true;
             dealDamage(damage);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -146,10 +158,17 @@ public class EnemyAI : MonoBehaviour
         
         if (health<=0)
         {
-            Invoke("DestroyEnemy", 0.5f);
+            DestroyEnemy();
         }
 
     }
+
+    // Freezing attack
+    public void freeze()
+    {
+        agent.speed = 0;
+    }
+
 
     private void DestroyEnemy()
     {

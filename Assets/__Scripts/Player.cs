@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public int currentHealth, currentExp;
     public int currentLevel = 1;
 
+    public int specialBulletCooldown = 5;
+
     public float moveSpeed;
 
     public Rigidbody rig;
@@ -23,6 +25,9 @@ public class Player : MonoBehaviour
     public float groundDistance = 0.2f;
     public LayerMask groundMask;
     bool isGrounded;
+
+    public bool fireClass = false;
+    public bool iceClass = false;
 
     public Camera cam;
     public GameObject hand;
@@ -37,6 +42,8 @@ public class Player : MonoBehaviour
 
     public bool gunPicked = false;
     public GameObject playerProjectile;
+    public GameObject fireBullet;
+    public GameObject iceBullet;
     public GameObject handGun;
 
 
@@ -47,6 +54,25 @@ public class Player : MonoBehaviour
         currentExp = 0;
         healthBar.SetMaxHealth(maxHealth);
         expBar.setMaxExp(maxExp);
+        StartCoroutine(addHealth());
+    }
+
+    IEnumerator addHealth()
+    {
+        // Loops forever
+        while (true)
+        {   // If current health is less than max, regen
+            if(currentHealth < maxHealth)
+            {
+                currentHealth += 5;
+                healthBar.SetHealth(currentHealth);
+                yield return new WaitForSeconds(5);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
     }
 
     public void TakeDamage(int damage)
@@ -96,21 +122,15 @@ public class Player : MonoBehaviour
         if (Input.GetMouseButtonUp(0) && attackTimer >= myWeapon.attackCoolDown)
         {
 
-
             //DoAttack();
             DoMeleeAttack();
         }
 
         if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown)
         {
-
-
+            specialBulletCooldown--;
             shoot();
         }
-
-
-
-
 
 
     }
@@ -152,17 +172,23 @@ public class Player : MonoBehaviour
 
     private void shoot()
     {
-        Instantiate(playerProjectile, transform.position, transform.rotation);
-
-        /*Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-        position = Camera.main.ScreenToWorldPoint(position);
-        GameObject go = Instantiate(playerProjectile, transform.position, Quaternion.identity);
-        go.transform.LookAt(position);
-        Debug.Log(position);
-        //go.rigidbody.AddForce(go.transform.forward * 1000);
-        Rigidbody rb = go.GetComponent<Rigidbody>();
-        rb.AddForce(go.transform.forward * 1000);*/
-
+        if(specialBulletCooldown > 0)
+        {
+            Instantiate(playerProjectile, transform.position, Camera.main.transform.rotation);
+        }
+        else
+        {
+            specialBulletCooldown = 5;
+            if (iceClass)
+            {
+                Instantiate(iceBullet, transform.position, Camera.main.transform.rotation);
+            }
+            else if (fireClass)
+            {
+                Instantiate(fireBullet, transform.position, Camera.main.transform.rotation);
+            }
+        }
+        
     }
 
     public void gainExp(int exp)
@@ -193,26 +219,6 @@ public class Player : MonoBehaviour
         rig.velocity = dir;
 
     }
-
-    /*void Jump()
-    {
-        if (CanJump())
-        {
-            rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        }
-    }
-
-    bool CanJump()
-    {
-        Ray ray = new Ray(transform.position, Vector3.down);
-        RaycastHit hit;
-
-        if(Physics.Raycast(ray, out hit, 0.5f))
-        {
-            return hit.collider != null;
-        }
-        return false;
-    }*/
 
     private void OnDrawGizmosSelected()
     {

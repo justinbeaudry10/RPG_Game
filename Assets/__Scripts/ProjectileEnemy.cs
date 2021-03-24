@@ -5,14 +5,14 @@ using UnityEngine;
 public class ProjectileEnemy : MonoBehaviour
 {
     public float speed;
-    public int bulletDamage = 5;
+    public int bulletDamage = 10;
 
     private GameObject playerGO;
     private Player player;
     private Transform playerTransform;
     private Vector3 target;
 
-    private void Awake()
+    protected void Awake()
     {
         playerGO = GameObject.Find("Player");
         player = playerGO.GetComponent<Player>();
@@ -20,23 +20,18 @@ public class ProjectileEnemy : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         target = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
-
+        
         transform.LookAt(playerTransform.position);
 
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-
-        //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
         transform.position += transform.forward * speed * Time.deltaTime;
-
-
     }
 
     private void OnCollisionEnter(Collision collision)

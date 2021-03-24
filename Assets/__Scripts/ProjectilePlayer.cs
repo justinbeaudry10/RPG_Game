@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ProjectilePlayer : MonoBehaviour
 {
-    public float speed;
+    public float speed = 20;
     public int bulletDamage = 5;
 
-    private EnemyAI enemy;
-    private GameObject playerGO;
-    private Player player;
-    private Transform playerTransform;
-    private Vector3 target;
+    protected EnemyAI enemy;
+    protected GameObject playerGO;
+    protected Player player;
+    protected Transform playerTransform;
+    protected Vector3 target;
 
     private void Awake()
     {
@@ -23,8 +23,7 @@ public class ProjectilePlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Vector3 position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
-        //transform.LookAt(position);
+
         transform.position += new Vector3(0, 1.5f, 0); ;
         transform.position += transform.forward * 2;
 
@@ -38,23 +37,19 @@ public class ProjectilePlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        print("PlayerProjectileCollison");
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Hit: " + other);
         if (other.CompareTag("Enemy"))
         {
-            print("Hit Enemy");
             enemy = other.gameObject.GetComponent<EnemyAI>();
-            enemy.TakeDamage(50);
+            enemy.TakeDamage(25);
             Destroy(gameObject);
         }
         else
         {
-            print("PlayerProjectileTrigger");
             Destroy(gameObject);
         }
 

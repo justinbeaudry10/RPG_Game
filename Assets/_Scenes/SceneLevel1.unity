@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.62703353, g: 0.7086395, b: 0.7482275, a: 1}
+  m_IndirectSpecularColor: {r: 0.62703353, g: 0.7086391, b: 0.748226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -81474,6 +81474,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 655388726181300585, guid: 9a6d5989fc971e84a9c7c35419c07a39,
+        type: 3}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 655388726181300587, guid: 9a6d5989fc971e84a9c7c35419c07a39,
         type: 3}
       propertyPath: m_RootOrder
@@ -84062,6 +84067,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 245625036223290681, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1426894230474178042, guid: 571bb038be3f00b4ca5494274f732069,
         type: 3}
       propertyPath: fpsCam
@@ -84104,14 +84114,36 @@ PrefabInstance:
       objectReference: {fileID: 1330043674}
     - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
         type: 3}
+      propertyPath: iceClass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
+      propertyPath: fireClass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1402552198}
     - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
         type: 3}
+      propertyPath: iceBullet
+      value: 
+      objectReference: {fileID: 2669793610928777350, guid: d191951e68af5194aa9ae29fc525c707,
+        type: 3}
+    - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
       propertyPath: levelText
       value: 
       objectReference: {fileID: 655580516}
+    - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
+      propertyPath: fireBullet
+      value: 
+      objectReference: {fileID: 5749906905737019849, guid: a45f2f5bceaecd74793c295ad50d305f,
+        type: 3}
     - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
         type: 3}
       propertyPath: healthText
@@ -84170,6 +84202,11 @@ PrefabInstance:
     - target: {fileID: 6474328120364344655, guid: 571bb038be3f00b4ca5494274f732069,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7493068253389941016, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
