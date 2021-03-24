@@ -447,31 +447,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17ddb6c36eab80d4b8a80a34ceaeefee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
-  expBar: {fileID: 0}
-  healthText: {fileID: 0}
-  levelText: {fileID: 0}
-  maxHealth: 100
-  maxExp: 5
-  currentHealth: 0
-  currentExp: 0
-  currentLevel: 1
   moveSpeed: 5
   rig: {fileID: 8184512793794034405}
   jumpForce: 5
-  groundCheck: {fileID: 0}
-  groundDistance: 0.2
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 0
-  cam: {fileID: 0}
-  hand: {fileID: 0}
-  myWeapon: {fileID: 0}
-  meleeAttackRange: 0
-  playerInMeleeAttackRange: 0
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &1324141647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,8 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 25
-  attackRange: 0
-  attackCoolDown: 0
+  attackR: 7
 --- !u!1 &8184512794765799321
 GameObject:
   m_ObjectHideFlags: 0
