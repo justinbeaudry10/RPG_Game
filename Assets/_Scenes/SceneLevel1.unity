@@ -84079,6 +84079,11 @@ PrefabInstance:
       objectReference: {fileID: 1330043674}
     - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
         type: 3}
+      propertyPath: iceClass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6474328120364344643, guid: 571bb038be3f00b4ca5494274f732069,
+        type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1402552198}

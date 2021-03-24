@@ -11,11 +11,19 @@ public class Player : MonoBehaviour
     public HealthBar healthBar;
     public ExpBar expBar;
     public TextMeshProUGUI healthText, levelText;
+    public Camera cam;
+    public GameObject hand;
+    public Weapon myWeapon;
+    public GameObject projectile;
+    public GameObject playerProjectile;
+    public GameObject fireBullet;
+    public GameObject iceBullet;
+    public GameObject handGun;
+
     public int maxHealth = 100;
     public int maxExp = 5;
     public int currentHealth, currentExp;
     public int currentLevel = 1;
-
     public int specialBulletCooldown = 5;
 
     public float moveSpeed;
@@ -31,11 +39,6 @@ public class Player : MonoBehaviour
     public bool fireClass = false;
     public bool iceClass = false;
 
-    public Camera cam;
-    public GameObject hand;
-    public Weapon myWeapon;
-    public GameObject projectile;
-
     private float attackTimer;
 
     public float meleeAttackRange;
@@ -43,10 +46,7 @@ public class Player : MonoBehaviour
     public LayerMask whatIsEnemy;
 
     public bool gunPicked = false;
-    public GameObject playerProjectile;
-    public GameObject fireBullet;
-    public GameObject iceBullet;
-    public GameObject handGun;
+    
 
     private void Awake()
     {
@@ -139,8 +139,17 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown)
         {
-            specialBulletCooldown--;
             shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            shootFire();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            shootIce();
         }
 
 
@@ -183,23 +192,23 @@ public class Player : MonoBehaviour
 
     private void shoot()
     {
-        if(specialBulletCooldown > 0)
+        Instantiate(playerProjectile, transform.position, Camera.main.transform.rotation);
+    }
+
+    private void shootFire()
+    {
+        if (fireClass)
         {
-            Instantiate(playerProjectile, transform.position, Camera.main.transform.rotation);
+            Instantiate(fireBullet, transform.position, Camera.main.transform.rotation);
         }
-        else
+    }
+
+    private void shootIce()
+    {
+        if (iceClass)
         {
-            specialBulletCooldown = 5;
-            if (iceClass)
-            {
-                Instantiate(iceBullet, transform.position, Camera.main.transform.rotation);
-            }
-            else if (fireClass)
-            {
-                Instantiate(fireBullet, transform.position, Camera.main.transform.rotation);
-            }
+            Instantiate(iceBullet, transform.position, Camera.main.transform.rotation);
         }
-        
     }
 
     public void gainExp(int exp)
