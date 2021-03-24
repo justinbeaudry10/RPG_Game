@@ -8,6 +8,7 @@ public class EnemyFollow : MonoBehaviour
 {
     public NavMeshAgent enemy;
     public Transform player;
+    public Player playerGO;
 
     public float health = 25f;
     public void TakeDamage(float amnt)
@@ -34,5 +35,29 @@ public class EnemyFollow : MonoBehaviour
     void Update()
     {
         enemy.SetDestination(player.position);
+    }
+
+    //Detects collision with PlayerProjectile
+    void OnCollisionEnter(Collision coll)
+    {
+        GameObject otherGO = coll.gameObject;
+        switch (otherGO.tag)
+        {
+            case "PlayerProjectile":
+                TakeDamage(playerGO.myWeapon.attackDamage);
+
+                if (health <= 0)
+                {
+                    //Destroy This Enemy Instance
+                    Destroy(this.gameObject);
+                }
+                Destroy(otherGO);
+                break;
+
+            default:
+                print("Enemy was hit by non-ProjectileHero: " + otherGO.name);
+                break;
+
+        }
     }
 }
