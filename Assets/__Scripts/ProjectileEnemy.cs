@@ -5,18 +5,26 @@ using UnityEngine;
 public class ProjectileEnemy : MonoBehaviour
 {
     public float speed;
+    public int bulletDamage = 5;
 
-    private Transform player;
+    private GameObject playerGO;
+    private Player player;
+    private Transform playerTransform;
     private Vector3 target;
+
+    private void Awake()
+    {
+        playerGO = GameObject.Find("Player");
+        player = playerGO.GetComponent<Player>();
+        playerTransform = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
+        target = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
 
-        target = new Vector3(player.position.x, player.position.y, player.position.z);
-
-        transform.LookAt(player.position);
+        transform.LookAt(playerTransform.position);
 
     }
 
@@ -41,7 +49,8 @@ public class ProjectileEnemy : MonoBehaviour
     {
         if (other.CompareTag("Player") || other.CompareTag("PlayerEyes"))
         {
-            print("Hit player");
+            print("Hit playerTransform");
+            player.TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
         else
