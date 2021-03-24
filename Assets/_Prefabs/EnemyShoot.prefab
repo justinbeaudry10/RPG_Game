@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 655388726181300585}
   - component: {fileID: 655388726181300586}
   - component: {fileID: 655388726181300584}
+  - component: {fileID: 5995981292192128495}
   m_Layer: 10
   m_Name: EnemyShoot
   m_TagString: Enemy
@@ -165,7 +166,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 655388726181300585}
   player: {fileID: 0}
+  playerGO: {fileID: 0}
   health: 100
+--- !u!114 &5995981292192128495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655388726181300599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb300b4360e490641afcc743212e2cdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startTimeBetweenShots: 2
+  projectile: {fileID: 531515768302370424, guid: 4a1bea39983e8af48a242a8c2c083eb8,
+    type: 3}
+  player: {fileID: 8184512793794034407, guid: 55900a8f71eb05948bf37f79d4368f5b, type: 3}
 --- !u!1 &4689182044377417206
 GameObject:
   m_ObjectHideFlags: 0

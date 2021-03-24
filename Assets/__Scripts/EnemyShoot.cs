@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot2 : MonoBehaviour
+public class EnemyShoot : MonoBehaviour
 {
     private float timeBetweenShots;
     public float startTimeBetweenShots;
