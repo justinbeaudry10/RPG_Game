@@ -75,7 +75,7 @@ public class EnemyAI : MonoBehaviour
         while (true)
         {
             if (onFire) {
-                TakeDamage(5);
+                TakeDamage(20);
                 print("On fire");
                 yield return new WaitForSeconds(1);
             }

@@ -10,21 +10,18 @@ public class Player : MonoBehaviour
 
     public HealthBar healthBar;
     public ExpBar expBar;
+    public AbilityBar fireBar, iceBar, shieldBar;
     public TextMeshProUGUI healthText, levelText;
     public Camera cam;
-    public GameObject hand;
     public Weapon myWeapon;
-    public GameObject projectile;
-    public GameObject playerProjectile;
-    public GameObject fireBullet;
-    public GameObject iceBullet;
-    public GameObject handGun;
+    public GameObject hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
 
     public int maxHealth = 100;
     public int maxExp = 5;
     public int currentHealth, currentExp;
     public int currentLevel = 1;
-    public int specialBulletCooldown = 5;
+    public int abilityCooldown = 10;
+    private int fireCooldown, iceCooldown, shieldCooldown;
 
     public float moveSpeed;
 
@@ -69,8 +66,17 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         currentExp = 0;
         healthBar.SetMaxHealth(maxHealth);
+
+        fireCooldown = iceCooldown = shieldCooldown = abilityCooldown;
+
         expBar.setMaxExp(maxExp);
+        fireBar.HideBar();
+        iceBar.HideBar();
+        shieldBar.HideBar();
         StartCoroutine(addHealth());
+        StartCoroutine(fireRegen());
+        StartCoroutine(iceRegen());
+        StartCoroutine(shieldRegen());
     }
 
     IEnumerator addHealth()
@@ -83,6 +89,57 @@ public class Player : MonoBehaviour
                 currentHealth += 5;
                 healthBar.SetHealth(currentHealth);
                 yield return new WaitForSeconds(5);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator fireRegen()
+    {
+        while (true)
+        {
+            if (fireCooldown < 10)
+            {
+                fireCooldown++;
+                fireBar.SetValue(fireCooldown);
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator iceRegen()
+    {
+        while (true)
+        {
+            if (iceCooldown < 10)
+            {
+                iceCooldown++;
+                iceBar.SetValue(iceCooldown);
+                yield return new WaitForSeconds(1);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+
+    IEnumerator shieldRegen()
+    {
+        while (true)
+        {
+            if (shieldCooldown < 10)
+            {
+                shieldCooldown++;
+                shieldBar.SetValue(shieldCooldown);
+                yield return new WaitForSeconds(1);
             }
             else
             {
@@ -208,25 +265,31 @@ public class Player : MonoBehaviour
 
     private void ShootFire()
     {
-        if (fireClass)
+        if (fireClass && fireCooldown == 10)
         {
+            fireCooldown = 0;
+            fireBar.SetValue(fireCooldown);
             Instantiate(fireBullet, transform.position, Camera.main.transform.rotation);
         }
     }
 
     private void ShootIce()
     {
-        if (iceClass)
+        if (iceClass && iceCooldown == 10)
         {
+            iceCooldown = 0;
+            iceBar.SetValue(iceCooldown);
             Instantiate(iceBullet, transform.position, Camera.main.transform.rotation);
         }
     }
 
     private void EnableShield()
     {
-        if (shieldClass)
+        if (shieldClass && shieldCooldown == 10)
         {
             shieldEnabled = true;
+            shieldCooldown = 0;
+            shieldBar.SetValue(shieldCooldown);
             Invoke("DisableShield", 5);
         }
     }
@@ -280,6 +343,7 @@ public class Player : MonoBehaviour
         {
             print("Player has chosen fire potion");
             fireClass = true;
+            fireBar.ShowBar();
             DestroyPotions();
         }
 
@@ -287,12 +351,14 @@ public class Player : MonoBehaviour
         {
             print("Player has chosen ice potion");
             iceClass = true;
+            iceBar.ShowBar();
             DestroyPotions();
         }
         else if (coll.CompareTag("ShieldPotion"))
         {
             print("Player has chosen shield potion");
             shieldClass = true;
+            shieldBar.ShowBar();
             DestroyPotions();
         }
 
