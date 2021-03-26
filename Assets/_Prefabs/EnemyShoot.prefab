@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 655388726181300597}
   - component: {fileID: 655388726181300598}
   - component: {fileID: 655388726181300585}
-  - component: {fileID: 655388726181300586}
-  - component: {fileID: 655388726181300584}
   - component: {fileID: 5995981292192128495}
   - component: {fileID: 7702984507961675144}
   m_Layer: 10
@@ -121,7 +119,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &655388726181300586
+--- !u!114 &5995981292192128495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,11 +128,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 655388726181300599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9abe73aa861a9684f9ef4c1bf11ec789, type: 3}
+  m_Script: {fileID: 11500000, guid: bb300b4360e490641afcc743212e2cdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 655388726181300585}
-  player: {fileID: 0}
+  player: {fileID: 8184512793794034407, guid: 55900a8f71eb05948bf37f79d4368f5b, type: 3}
   playerGO: {fileID: 0}
   playerTransform: {fileID: 0}
   damage: 10
@@ -155,38 +153,9 @@ MonoBehaviour:
   onFire: 0
   frozen: 0
   health: 100
---- !u!114 &655388726181300584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655388726181300599}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac03b614d23d12f42bfb7cf3e1a71711, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 655388726181300585}
-  player: {fileID: 0}
-  playerGO: {fileID: 0}
-  health: 100
---- !u!114 &5995981292192128495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655388726181300599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb300b4360e490641afcc743212e2cdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   startTimeBetweenShots: 2
   projectile: {fileID: 531515768302370424, guid: 4a1bea39983e8af48a242a8c2c083eb8,
     type: 3}
-  player: {fileID: 8184512793794034407, guid: 55900a8f71eb05948bf37f79d4368f5b, type: 3}
 --- !u!54 &7702984507961675144
 Rigidbody:
   m_ObjectHideFlags: 0

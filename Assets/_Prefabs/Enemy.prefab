@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 655388726181300598}
   - component: {fileID: 655388726181300585}
   - component: {fileID: 655388726181300586}
-  - component: {fileID: 655388726181300584}
   - component: {fileID: -2726802211621950692}
   m_Layer: 10
   m_Name: Enemy
@@ -151,22 +150,8 @@ MonoBehaviour:
   attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
-  health: 100
---- !u!114 &655388726181300584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655388726181300599}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac03b614d23d12f42bfb7cf3e1a71711, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 655388726181300585}
-  player: {fileID: 0}
-  playerGO: {fileID: 0}
+  onFire: 0
+  frozen: 0
   health: 100
 --- !u!54 &-2726802211621950692
 Rigidbody:

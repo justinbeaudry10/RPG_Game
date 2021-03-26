@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthText, levelText;
     public Camera cam;
     public Weapon myWeapon;
-    public GameObject hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
+    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
 
     public int maxHealth = 100;
     public int maxExp = 5;
@@ -70,6 +70,7 @@ public class Player : MonoBehaviour
         fireCooldown = iceCooldown = shieldCooldown = abilityCooldown;
 
         expBar.setMaxExp(maxExp);
+        deathText.SetActive(false);
         fireBar.HideBar();
         iceBar.HideBar();
         shieldBar.HideBar();
@@ -84,7 +85,7 @@ public class Player : MonoBehaviour
         // Loops forever
         while (true)
         {   // If current health is less than max, regen
-            if(currentHealth < maxHealth)
+            if(currentHealth < maxHealth && currentHealth > 0)
             {
                 currentHealth += 5;
                 healthBar.SetHealth(currentHealth);
@@ -159,6 +160,8 @@ public class Player : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
+                crossHair.SetActive(false);
+                deathText.SetActive(true);
                 Invoke("Respawn", 3f);
             }
         }
@@ -249,9 +252,14 @@ public class Player : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, myWeapon.attackDamage))
             {
-                if (hit.collider.tag == "Enemy")
+                if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyAI>())
                 {
                     EnemyAI ehealth = hit.collider.GetComponent<EnemyAI>();
+                    ehealth.TakeDamage(myWeapon.attackDamage);
+                }
+                else if(hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyShoot>())
+                {
+                    EnemyShoot ehealth = hit.collider.GetComponent<EnemyShoot>();
                     ehealth.TakeDamage(myWeapon.attackDamage);
                 }
             }

@@ -2,24 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour
+public class EnemyShoot : EnemyAI
 {
     private float timeBetweenShots;
     public float startTimeBetweenShots;
 
     public GameObject projectile;
-    public Transform player;
+
+    public override void Awake()
+    {
+        base.Awake();
+    }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
 
         timeBetweenShots = startTimeBetweenShots;
     }
 
     // Update is called once per frame
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (timeBetweenShots <= 0)
         {
             Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);

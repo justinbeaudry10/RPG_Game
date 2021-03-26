@@ -31,7 +31,7 @@ public class EnemyAI : MonoBehaviour
 
     public float health;
 
-    void Awake()
+    public virtual void Awake()
     {
         playerGO = GameObject.Find("Player");
         playerTransform = GameObject.Find("Player").transform;
@@ -40,13 +40,13 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         StartCoroutine(burn());
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -86,7 +86,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    private void Patroling()
+    public void Patroling()
     {
         if (!walkPointSet)
         {
@@ -107,7 +107,7 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private void SearchWalkPoint()
+    public void SearchWalkPoint()
     {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
@@ -121,12 +121,12 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    private void ChasePlayer()
+    public void ChasePlayer()
     {
         agent.SetDestination(playerTransform.position);
     }
 
-    private void AttackPlayer()
+    public void AttackPlayer()
     {
         agent.SetDestination(transform.position);
 
@@ -142,7 +142,7 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Damaging player
-    private void dealDamage(int damage)
+    public void dealDamage(int damage)
     {
         player.TakeDamage(damage);
     }
@@ -176,7 +176,7 @@ public class EnemyAI : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmosSelected()
+    public void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
