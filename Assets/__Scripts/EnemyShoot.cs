@@ -4,38 +4,50 @@ using UnityEngine;
 
 public class EnemyShoot : EnemyAI
 {
-    private float timeBetweenShots;
-    public float startTimeBetweenShots;
+    [Header("Shooting Enemy and Game System Settings")]
+    public GameObject projectile;                   //Variable to reference the enemy projectile prefab
 
-    public GameObject projectile;
+    [Header("Shooting Enemy Attack Settings")]
+    private float timeBetweenShots;                 //Stores the attack time between shots
+    public float startTimeBetweenShots;             //Stores the start time for attack between shots
 
     public override void Awake()
     {
+        //Call the parent Awake()
         base.Awake();
     }
 
     // Start is called before the first frame update
     public override void Start()
     {
+        //Call the parent Start()
         base.Start();
 
+        //The time between shots equals the start time
         timeBetweenShots = startTimeBetweenShots;
     }
 
     // Update is called once per frame
     public override void Update()
     {
+        //Call the parent Update()
         base.Update();
 
+        //If the time between shots is less than or equal to 0
         if (timeBetweenShots <= 0)
         {
+            //Create a projectile (to shoot)
             Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);
+
+            //The time between shots is the start time between shots
             timeBetweenShots = startTimeBetweenShots;
         }
+
+        //If the time between shots is not less than or equal to 0
         else
         {
+            //Decrease the time between shots by the difference in time
             timeBetweenShots -= Time.deltaTime;
         }
-
     }
 }

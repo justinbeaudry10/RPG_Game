@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     static public Player S; // Singleton for player
 
+    [Header("Player and Game System Settings")]
     public HealthBar healthBar;
     public ExpBar expBar;
     public AbilityBar fireBar, iceBar, shieldBar;
@@ -16,37 +17,35 @@ public class Player : MonoBehaviour
     public Weapon myWeapon;
     public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
 
-    public int maxHealth = 100;
-    public int maxExp = 5;
-    public int currentHealth, currentExp;
-    public int currentLevel = 1;
-    public int abilityCooldown = 10;
-    private int fireCooldown, iceCooldown, shieldCooldown;
+    [Header ("Player Properties Settings")]
+    public Rigidbody rig;                                   //References the player's rigidbody
+    public float moveSpeed;                                 //Variable to control the player's movement speed
+    public int maxHealth = 100;                             //The player's maximum health
+    public int maxExp = 5;                                  //The player's maximum experience points
+    public int currentHealth, currentExp;                   //The player's current health and experience points
+    public int currentLevel = 1;                            //The player's current level
+    public int abilityCooldown = 10;                        //Cool down time before using an ability
+    private int fireCooldown, iceCooldown, shieldCooldown;  //Stores the cool down tims for the different types of ablilities 
 
-    public float moveSpeed;
+    [Header("Player Jump Settings")]
+    public Transform groundCheck;           //References the GroundCheck GO on the player (used to check if player touches the ground)
+    public bool isGrounded;                 //Variable to check if the player is touching the ground
+    public LayerMask groundMask;            //References the layer for ground
+    private float _jumpForce = 5f;          //Variable to control the player's jump force
+    private float _groundDistance = 0.2f;   //Distance the player should be from the ground to jump
 
-    public Rigidbody rig;
 
-    public float jumpForce;
-    public Transform groundCheck;
-    public float groundDistance = 0.2f;
-    public LayerMask groundMask;
-    bool isGrounded;
-
+    [Header("Player Attack Settings")]
     public bool fireClass = false;
     public bool iceClass = false;
     public bool shieldClass = false;
-
     private bool shieldEnabled = false;
-
     private float attackTimer;
-
     public float meleeAttackRange;
     public bool playerInMeleeAttackRange;
-    public LayerMask whatIsEnemy;
-
+    public LayerMask whatIsEnemy;           //References the layer for enemies
     public bool gunPicked = false;
-    
+
 
     private void Awake()
     {
@@ -85,7 +84,7 @@ public class Player : MonoBehaviour
         // Loops forever
         while (true)
         {   // If current health is less than max, regen
-            if(currentHealth < maxHealth && currentHealth > 0)
+            if (currentHealth < maxHealth && currentHealth > 0)
             {
                 currentHealth += 5;
                 healthBar.SetHealth(currentHealth);
@@ -172,12 +171,21 @@ public class Player : MonoBehaviour
         Main.S.Restart();
     }
 
-    void Jump2()
+    /// <summary>
+    /// Controls the player's jump movement
+    /// </summary>
+    void Jump()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        //Checks if the player is touching the ground
+        //CheckSphere checks if any colliders overlapping the sphere
+        isGrounded = Physics.CheckSphere(groundCheck.position, _groundDistance, groundMask);
+
+        //If the player is touching the ground
         if (isGrounded)
         {
-            rig.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            //The player can jump
+            //Add a force in the upward direction to create the jump
+            rig.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
         }
     }
 
@@ -187,24 +195,27 @@ public class Player : MonoBehaviour
         healthText.text = currentHealth.ToString();
         attackTimer += Time.deltaTime;
 
+        //Moves the player
         Move();
 
+        //If the user presses the space bar
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Jump2();
-
+            //The player jumps
+            Jump();
         }
 
-
+        //If the player left-clicks and the attack cool down is done
         if (Input.GetMouseButtonUp(0) && attackTimer >= myWeapon.attackCoolDown)
         {
-
-            //DoAttack();
+            //Do a melee attack
             DoMeleeAttack();
         }
 
+        //If the player right-clicks the mouse an the cool down is done
         if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown)
         {
+            //Shoot bullets
             Shoot();
         }
 
@@ -226,48 +237,55 @@ public class Player : MonoBehaviour
 
     }
 
-    private void DoAttack()
-    {
-        
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, myWeapon.attackDamage))
-        {
-            if(hit.collider.tag == "Enemy")
-            {
-                EnemyFollow ehealth = hit.collider.GetComponent<EnemyFollow>();
-                ehealth.TakeDamage(myWeapon.attackDamage);
-            }
-        }
-    }
-
+    /// <summary>
+    /// Controls the player's melee attack
+    /// </summary>
     private void DoMeleeAttack()
     {
+        //Checks if the player is within attack range of the enemy
         playerInMeleeAttackRange = Physics.CheckSphere(transform.position, meleeAttackRange, whatIsEnemy);
-        
+
+        //If the player is within attack range
         if (playerInMeleeAttackRange)
         {
+            //Create a ray at the mouses position
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+            //Creating a variable to read information from the ray
             RaycastHit hit;
 
+            //If the raycast hits something withing the range
             if (Physics.Raycast(ray, out hit, myWeapon.attackDamage))
             {
+                //If the collider is a regular enemy
                 if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyAI>())
                 {
+                    //Get health of the enemy
                     EnemyAI ehealth = hit.collider.GetComponent<EnemyAI>();
+
+                    //Reduce the enemy's health
                     ehealth.TakeDamage(myWeapon.attackDamage);
                 }
-                else if(hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyShoot>())
+
+                //If the collider is a shooting enemy
+                else if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyShoot>())
                 {
+                    //Get the shooting enemy's health
                     EnemyShoot ehealth = hit.collider.GetComponent<EnemyShoot>();
+
+                    //Reduce the shooting enemy's health
                     ehealth.TakeDamage(myWeapon.attackDamage);
                 }
             }
         }
     }
 
+    /// <summary>
+    /// Control the player's shooting
+    /// </summary>
     private void Shoot()
     {
+        //Create a projectile 
         Instantiate(playerProjectile, transform.position, Camera.main.transform.rotation);
     }
 
@@ -310,7 +328,7 @@ public class Player : MonoBehaviour
     public void gainExp(int exp)
     {
         currentExp += exp;
-        
+
         if (currentExp > maxExp)
         {
             int extraExp = currentExp - maxExp;
@@ -323,26 +341,39 @@ public class Player : MonoBehaviour
         levelText.text = "Level " + currentLevel.ToString();
     }
 
+    /// <summary>
+    /// Controls the player's movement
+    /// </summary>
     void Move()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        //Get the keyboard's axis for movement
+        float x = Input.GetAxis("Horizontal");  //To move left and right
+        float z = Input.GetAxis("Vertical");    //To move foward and backward
 
+        //Store the players movement direction
         Vector3 dir = transform.right * x + transform.forward * z;
+
+        //Multiply the movement direction vector by the movement speed
         dir *= moveSpeed;
+
+        //Set the y value of the direction equal to the rigidbody's y value
+        //For physics calculations such as gravity
         dir.y = rig.velocity.y;
 
+        //Set the direction
         rig.velocity = dir;
-
     }
 
+    /// <summary>
+    /// Draws the melee attack range and ground range
+    /// </summary>
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, meleeAttackRange);
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
+        Gizmos.DrawWireSphere(groundCheck.position, _groundDistance);
     }
 
     private void OnTriggerEnter(Collider coll)
