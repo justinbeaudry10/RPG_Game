@@ -10,6 +10,7 @@ public class EnemyShoot : EnemyAI
     [Header("Shooting Enemy Attack Settings")]
     private float timeBetweenShots;                 //Stores the attack time between shots
     public float startTimeBetweenShots;             //Stores the start time for attack between shots
+    private AudioSource zoombieShootingAudio;       //Variable to reference the audio source for enemy shooting
 
     public override void Awake()
     {
@@ -25,6 +26,9 @@ public class EnemyShoot : EnemyAI
 
         //The time between shots equals the start time
         timeBetweenShots = startTimeBetweenShots;
+
+        //get the audio source component
+        zoombieShootingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -38,6 +42,9 @@ public class EnemyShoot : EnemyAI
         {
             //Create a projectile (to shoot)
             Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);
+            
+            //Play the shooting audio
+            zoombieShootingAudio.Play();
 
             //The time between shots is the start time between shots
             timeBetweenShots = startTimeBetweenShots;
