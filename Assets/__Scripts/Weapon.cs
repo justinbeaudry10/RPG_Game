@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    //Weapon attributes (IN PROGRESS FOR MULTIPLE WEAPONS)
     public int attackDamage;
     public float attackRange;
     public float attackCoolDown;

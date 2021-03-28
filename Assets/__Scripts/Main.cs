@@ -9,11 +9,16 @@ public class Main : MonoBehaviour
 
     private void Awake()
     {
+        //Assign the Singleton
         S = this;
     }
 
+    /// <summary>
+    /// Method to restart the game
+    /// </summary>
     public void Restart()
     {
+        //Reload the Scene
         SceneManager.LoadScene("SceneLevel1");
     }
 }

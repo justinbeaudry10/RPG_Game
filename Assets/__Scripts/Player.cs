@@ -99,12 +99,19 @@ public class Player : MonoBehaviour
 
     IEnumerator fireRegen()
     {
+        //Loop forever
         while (true)
         {
+            //If the fire cool down is less than 10
             if (fireCooldown < 10)
             {
+                //Increment the cool down by 1
                 fireCooldown++;
+                
+                //Update the fire bar
                 fireBar.SetValue(fireCooldown);
+
+                //Wait for 1 second
                 yield return new WaitForSeconds(1);
             }
             else
@@ -116,12 +123,19 @@ public class Player : MonoBehaviour
 
     IEnumerator iceRegen()
     {
+        //Loop forever
         while (true)
         {
+            //If the ice cool down is less than 10
             if (iceCooldown < 10)
             {
+                //Increment the cool down by 1
                 iceCooldown++;
+
+                //Update the ice bar
                 iceBar.SetValue(iceCooldown);
+
+                //Wait for 1 second
                 yield return new WaitForSeconds(1);
             }
             else
@@ -133,12 +147,19 @@ public class Player : MonoBehaviour
 
     IEnumerator shieldRegen()
     {
+        //Loop forever
         while (true)
         {
+            //If the shield cool down is less than 10
             if (shieldCooldown < 10)
             {
+                //Increment it by 1
                 shieldCooldown++;
+
+                //Update the shield bar 
                 shieldBar.SetValue(shieldCooldown);
+
+                //Wait for 1 second
                 yield return new WaitForSeconds(1);
             }
             else
@@ -150,9 +171,13 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        //If shield is not enabled
         if (!shieldEnabled)
         {
+            //The player takes damage
             currentHealth -= damage;
+
+            //Update the health bar 
             healthBar.SetHealth(currentHealth);
 
             // If dead, respawn will full health
@@ -161,13 +186,19 @@ public class Player : MonoBehaviour
                 currentHealth = 0;
                 crossHair.SetActive(false);
                 deathText.SetActive(true);
+
+                //Wait 3 seconds before respawning
                 Invoke("Respawn", 3f);
             }
         }
     }
 
+    /// <summary>
+    /// Method to respawn
+    /// </summary>
     private void Respawn()
     {
+        //Restart the game
         Main.S.Restart();
     }
 
@@ -192,7 +223,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        //Make the health text show the current health
         healthText.text = currentHealth.ToString();
+
+        //Update the attack timer
         attackTimer += Time.deltaTime;
 
         //Moves the player
@@ -212,29 +246,33 @@ public class Player : MonoBehaviour
             DoMeleeAttack();
         }
 
-        //If the player right-clicks the mouse an the cool down is done
-        if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown)
+        //If the player right-clicks the mouse and the cool down is done and the gun is picked
+        if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown && gunPicked)
         {
             //Shoot bullets
             Shoot();
         }
 
+        //If the player presses Q
         if (Input.GetKeyDown(KeyCode.Q))
         {
+            //Shoot fire
             ShootFire();
         }
 
+        //If the player presses E
         if (Input.GetKeyDown(KeyCode.E))
         {
+            //Shoot ice
             ShootIce();
         }
 
+        //If the player presses R
         if (Input.GetKeyDown(KeyCode.R))
         {
+            //Enable the shield
             EnableShield();
         }
-
-
     }
 
     /// <summary>
@@ -289,55 +327,104 @@ public class Player : MonoBehaviour
         Instantiate(playerProjectile, transform.position, Camera.main.transform.rotation);
     }
 
+    /// <summary>
+    /// Method to shoot fire
+    /// </summary>
     private void ShootFire()
     {
+        //If fire class is enabled and the cooldown is at 10
         if (fireClass && fireCooldown == 10)
         {
+            //The cooldown is 0
             fireCooldown = 0;
+
+            //Update the fire bar
             fireBar.SetValue(fireCooldown);
+
+            //Create a fire bullet
             Instantiate(fireBullet, transform.position, Camera.main.transform.rotation);
         }
     }
 
+    /// <summary>
+    /// Method to shoot ice
+    /// </summary>
     private void ShootIce()
     {
+        //If ice class is enabled and the cooldown is at 10
         if (iceClass && iceCooldown == 10)
         {
+            //The cooldown is 0
             iceCooldown = 0;
+
+            //Update the ice bar
             iceBar.SetValue(iceCooldown);
+
+            //Create a ice bullet
             Instantiate(iceBullet, transform.position, Camera.main.transform.rotation);
         }
     }
 
+    /// <summary>
+    /// Method to enable the shield
+    /// </summary>
     private void EnableShield()
     {
+        //If shield class is true and the cooldown is at 10
         if (shieldClass && shieldCooldown == 10)
         {
+            //The shield is enabled
             shieldEnabled = true;
+
+            //The cooldown is 0
             shieldCooldown = 0;
+
+            //Update the shield bar
             shieldBar.SetValue(shieldCooldown);
+
+            //Disable the shield in 5 seconds
             Invoke("DisableShield", 5);
         }
     }
 
+    /// <summary>
+    /// Method to disable the shield
+    /// </summary>
     private void DisableShield()
     {
+        //Disable the shield
         shieldEnabled = false;
     }
 
+    /// <summary>
+    /// Method to gain experince points
+    /// </summary>
+    /// <param name="exp"></param>
     public void gainExp(int exp)
     {
+        //Update the current exp
         currentExp += exp;
 
+        //If the current exp is greater than the max exp
         if (currentExp > maxExp)
         {
+            //Store the extra exp in a variable
             int extraExp = currentExp - maxExp;
+
+            //Increase the level by 1
             currentLevel++;
+
+            //Make the current exp equal the extra exp
             currentExp = extraExp;
+
+            //Update the exp bar
             expBar.setMaxExp(maxExp);
         }
 
+        //Update the exp bar
         expBar.setExp(currentExp);
+
+        //Update the level text
         levelText.text = "Level " + currentLevel.ToString();
     }
 
@@ -378,41 +465,65 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter(Collider coll)
     {
+        //If the player picks a fire potion
         if (coll.CompareTag("FirePotion"))
         {
             print("Player has chosen fire potion");
+
+            //Enable the fire class
             fireClass = true;
+
+            //Show the fire bar
             fireBar.ShowBar();
+
+            //Destory the potions
             DestroyPotions();
         }
 
+        //If the player picks a ice potion
         else if (coll.CompareTag("IcePotion"))
         {
             print("Player has chosen ice potion");
+
+            //Enable the ice class
             iceClass = true;
+
+            //Show the ice bar
             iceBar.ShowBar();
+
+            //Destory the potions
             DestroyPotions();
         }
+
+        //If the player picks a shield potion
         else if (coll.CompareTag("ShieldPotion"))
         {
             print("Player has chosen shield potion");
+
+            //Enable the shield class 
             shieldClass = true;
+
+            //Show the shield bar
             shieldBar.ShowBar();
+
+            //Destory the potions
             DestroyPotions();
         }
-
-
     }
 
+    /// <summary>
+    /// Method to destory the potions
+    /// </summary>
     private void DestroyPotions()
     {
+        //Find the potion game objects
         GameObject ShieldPotion = GameObject.FindGameObjectWithTag("ShieldPotion");
         GameObject FirePotion = GameObject.FindGameObjectWithTag("FirePotion");
         GameObject IcePotion = GameObject.FindGameObjectWithTag("IcePotion");
 
+        //Destory the potions
         Destroy(ShieldPotion);
         Destroy(FirePotion);
         Destroy(IcePotion);
-
     }
 }
