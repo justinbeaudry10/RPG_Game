@@ -29,6 +29,7 @@ public class EnemyAI : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;    //Variables to check if the player is in sight range or attack range
     public bool onFire = false;                             //Variable to check if enemy is on fire
     public bool frozen = false;                             //Variable to check if enemy is frozen
+    private AudioSource damageAudio;                        //Variable to reference the audio source for player damage
 
 
     public virtual void Awake()
@@ -51,6 +52,9 @@ public class EnemyAI : MonoBehaviour
     {
         //Starts a coroutine with burn method
         StartCoroutine(burn());
+
+        //get the audio source component
+        damageAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -191,6 +195,9 @@ public class EnemyAI : MonoBehaviour
         {
             //The enemy is has now attached
             alreadyAttacked = true;
+
+            //Play the shooting audio
+            damageAudio.Play();
 
             //The player takes damage
             dealDamage(damage);

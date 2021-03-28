@@ -26,7 +26,7 @@ public class Player : MonoBehaviour
     public int currentLevel = 1;                            //The player's current level
     public int abilityCooldown = 10;                        //Cool down time before using an ability
     private int fireCooldown, iceCooldown, shieldCooldown;  //Stores the cool down tims for the different types of ablilities
-    private AudioSource damageAudio;                        //Variable to reference the audio source for player damage
+    private AudioSource playerShootingAudio;                //Variable to reference the audio source for player shooting
 
     [Header("Player Jump Settings")]
     public Transform groundCheck;           //References the GroundCheck GO on the player (used to check if player touches the ground)
@@ -79,7 +79,7 @@ public class Player : MonoBehaviour
         // Turning off class ablility bars
 
         //get the audio source component
-        damageAudio = GetComponent<AudioSource>();
+        playerShootingAudio = GetComponent<AudioSource>();
 
         fireBar.HideBar();
         iceBar.HideBar();
@@ -188,9 +188,6 @@ public class Player : MonoBehaviour
             //The player takes damage
             currentHealth -= damage;
 
-            //Play the shooting audio
-            damageAudio.Play();
-
             //Update the health bar 
             healthBar.SetHealth(currentHealth);
 
@@ -265,6 +262,8 @@ public class Player : MonoBehaviour
         {
             //Shoot bullets
             Shoot();
+            //Play the shooting audio
+            playerShootingAudio.Play();
         }
 
         //If the player presses Q
