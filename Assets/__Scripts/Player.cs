@@ -63,13 +63,19 @@ public class Player : MonoBehaviour
     {
         // Sets health to max when level starts
         currentHealth = maxHealth;
+        // Set experience to 0
         currentExp = 0;
+        // Set health to the max health
         healthBar.SetMaxHealth(maxHealth);
 
+        // Set cooldown time for all class abilities
         fireCooldown = iceCooldown = shieldCooldown = abilityCooldown;
 
+        // Setting max experience value
         expBar.setMaxExp(maxExp);
+        // Making sure the death text is off
         deathText.SetActive(false);
+        // Turning off class ablility bars
         fireBar.HideBar();
         iceBar.HideBar();
         shieldBar.HideBar();
