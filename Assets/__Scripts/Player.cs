@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
     public int currentHealth, currentExp;                   //The player's current health and experience points
     public int currentLevel = 1;                            //The player's current level
     public int abilityCooldown = 10;                        //Cool down time before using an ability
-    private int fireCooldown, iceCooldown, shieldCooldown;  //Stores the cool down tims for the different types of ablilities 
+    private int fireCooldown, iceCooldown, shieldCooldown;  //Stores the cool down tims for the different types of ablilities
+    private AudioSource damageAudio;                        //Variable to reference the audio source for player damage
 
     [Header("Player Jump Settings")]
     public Transform groundCheck;           //References the GroundCheck GO on the player (used to check if player touches the ground)
@@ -76,6 +77,10 @@ public class Player : MonoBehaviour
         // Making sure the death text is off
         deathText.SetActive(false);
         // Turning off class ablility bars
+
+        //get the audio source component
+        damageAudio = GetComponent<AudioSource>();
+
         fireBar.HideBar();
         iceBar.HideBar();
         shieldBar.HideBar();
@@ -182,6 +187,9 @@ public class Player : MonoBehaviour
         {
             //The player takes damage
             currentHealth -= damage;
+
+            //Play the shooting audio
+            damageAudio.Play();
 
             //Update the health bar 
             healthBar.SetHealth(currentHealth);
