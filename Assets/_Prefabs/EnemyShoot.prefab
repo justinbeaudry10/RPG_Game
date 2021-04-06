@@ -135,14 +135,15 @@ MonoBehaviour:
   player: {fileID: 8184512793794034407, guid: 55900a8f71eb05948bf37f79d4368f5b, type: 3}
   playerGO: {fileID: 0}
   playerTransform: {fileID: 0}
-  damage: 10
-  expValue: 3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
+  damage: 10
+  expValue: 40
+  health: 100
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 5
   timeBetweenAttacks: 0.5
@@ -152,10 +153,9 @@ MonoBehaviour:
   playerInAttackRange: 0
   onFire: 0
   frozen: 0
-  health: 100
-  startTimeBetweenShots: 2
   projectile: {fileID: 531515768302370424, guid: 4a1bea39983e8af48a242a8c2c083eb8,
     type: 3}
+  startTimeBetweenShots: 2
 --- !u!54 &7702984507961675144
 Rigidbody:
   m_ObjectHideFlags: 0

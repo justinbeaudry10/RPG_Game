@@ -21,9 +21,10 @@ public class Player : MonoBehaviour
     public Rigidbody rig;                                   //References the player's rigidbody
     public float moveSpeed;                                 //Variable to control the player's movement speed
     public int maxHealth = 100;                             //The player's maximum health
-    public int maxExp = 5;                                  //The player's maximum experience points
-    public int currentHealth, currentExp;                   //The player's current health and experience points
-    public int currentLevel = 1;                            //The player's current level
+    public int maxExp = 10;                                  //The player's maximum experience points
+    public int currentHealth;                               // The player's current health
+    public static int currentExp;                           //The player's experience points
+    public static int currentLevel = 1;                            //The player's current level
     public int abilityCooldown = 10;                        //Cool down time before using an ability
     private int fireCooldown, iceCooldown, shieldCooldown;  //Stores the cool down tims for the different types of ablilities
     private AudioSource playerShootingAudio;                //Variable to reference the audio source for player shooting
@@ -37,9 +38,9 @@ public class Player : MonoBehaviour
 
 
     [Header("Player Attack Settings")]
-    public bool fireClass = false;
-    public bool iceClass = false;
-    public bool shieldClass = false;
+    public static bool fireClass;
+    public static bool iceClass;
+    public static bool shieldClass;
     private bool shieldEnabled = false;
     private float attackTimer;
     public float meleeAttackRange;
@@ -64,8 +65,7 @@ public class Player : MonoBehaviour
     {
         // Sets health to max when level starts
         currentHealth = maxHealth;
-        // Set experience to 0
-        currentExp = 0;
+
         // Set health to the max health
         healthBar.SetMaxHealth(maxHealth);
 
@@ -74,6 +74,10 @@ public class Player : MonoBehaviour
 
         // Setting max experience value
         expBar.setMaxExp(maxExp);
+
+        expBar.setExp(currentExp);
+        levelText.text = "Level " + currentLevel.ToString();
+
         // Making sure the death text is off
         deathText.SetActive(false);
         // Turning off class ablility bars
@@ -81,9 +85,19 @@ public class Player : MonoBehaviour
         //get the audio source component
         playerShootingAudio = GetComponent<AudioSource>();
 
-        fireBar.HideBar();
-        iceBar.HideBar();
-        shieldBar.HideBar();
+        if (fireClass)
+        {
+            fireBar.ShowBar();
+        }
+        else if (iceClass)
+        {
+            iceBar.ShowBar();
+        }
+        else if (shieldClass)
+        {
+            shieldBar.ShowBar();
+        }
+
         StartCoroutine(addHealth());
         StartCoroutine(fireRegen());
         StartCoroutine(iceRegen());
@@ -209,6 +223,12 @@ public class Player : MonoBehaviour
     /// </summary>
     private void Respawn()
     {
+        fireClass = false;
+        iceClass = false;
+        shieldClass = false;
+        currentExp = 0;
+        currentLevel = 1;
+
         //Restart the game
         Main.S.Restart();
     }
@@ -419,7 +439,7 @@ public class Player : MonoBehaviour
         currentExp += exp;
 
         //If the current exp is greater than the max exp
-        if (currentExp > maxExp)
+        if (currentExp >= maxExp)
         {
             //Store the extra exp in a variable
             int extraExp = currentExp - maxExp;

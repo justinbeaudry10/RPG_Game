@@ -196,9 +196,6 @@ public class EnemyAI : MonoBehaviour
             //The enemy is has now attached
             alreadyAttacked = true;
 
-            //Play the shooting audio
-            damageAudio.Play();
-
             //The player takes damage
             dealDamage(damage);
 
@@ -214,6 +211,9 @@ public class EnemyAI : MonoBehaviour
     /// <param name="damage"></param>
     public void dealDamage(int damage)
     {
+        //Play the damage audio
+        damageAudio.Play();
+
         //The player takes damage
         player.TakeDamage(damage);
     }

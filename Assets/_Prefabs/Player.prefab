@@ -343,7 +343,7 @@ MonoBehaviour:
   rig: {fileID: 6474328120364344653}
   moveSpeed: 5
   maxHealth: 100
-  maxExp: 5
+  maxExp: 100
   currentHealth: 0
   currentExp: 0
   currentLevel: 1
