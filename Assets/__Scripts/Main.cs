@@ -20,6 +20,7 @@ public class Main : MonoBehaviour
 
     private void Start()
     {
+        // Spawning enemies
         for(int enemies = 0; enemies < enemyCount; enemies++)
         {
             xPos = Random.Range(-10, 0);

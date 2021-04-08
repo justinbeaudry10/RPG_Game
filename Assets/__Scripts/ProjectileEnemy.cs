@@ -47,7 +47,7 @@ public class ProjectileEnemy : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //If the enemy projectile hit the player or the player's eyes
-        if (other.CompareTag("Player") || other.CompareTag("PlayerEyes"))
+        if (other.CompareTag("Player"))
         {
             //Print it hit the player
             print("Hit playerTransform");
