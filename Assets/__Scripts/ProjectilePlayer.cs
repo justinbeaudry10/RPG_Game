@@ -22,7 +22,7 @@ public class ProjectilePlayer : MonoBehaviour
         player = playerGO.GetComponent<Player>();
 
         //Initalize the player transform
-        playerTransform = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Start is called before the first frame update

@@ -11,7 +11,7 @@ public class ProjectileEnemy : MonoBehaviour
     [Header("Enemy Projectile Game and System Settings")]
     private GameObject playerGO;            //Variable to reference the Player GameObject
     private Player player;                  //Variable to reference the Player object
-    private Transform playerEyesTransform;  //Variable to reference the Player's eyes' transform component
+    private Transform playerTransform;  //Variable to reference the Player's eyes' transform component
     private Vector3 target;                 //Variable to store the target destination
 
     protected void Awake()
@@ -23,17 +23,17 @@ public class ProjectileEnemy : MonoBehaviour
         player = playerGO.GetComponent<Player>();
 
         //Assigning the player transform component (the player's eyes)
-        playerEyesTransform = GameObject.FindGameObjectWithTag("PlayerEyes").transform;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Start is called before the first frame update
     protected void Start()
     {   
         //Assigning the target to the player's eyes position
-        target = new Vector3(playerEyesTransform.position.x, playerEyesTransform.position.y, playerEyesTransform.position.z);
+        target = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
         
         //Make the projectile look at the player's eyes
-        transform.LookAt(playerEyesTransform.position);
+        transform.LookAt(playerTransform.position);
 
     }
 

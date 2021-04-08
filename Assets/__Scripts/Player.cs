@@ -313,6 +313,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void DoMeleeAttack()
     {
+        print("Melee");
         //Checks if the player is within attack range of the enemy
         playerInMeleeAttackRange = Physics.CheckSphere(transform.position, meleeAttackRange, whatIsEnemy);
 
