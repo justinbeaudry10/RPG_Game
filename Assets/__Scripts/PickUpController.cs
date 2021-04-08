@@ -16,7 +16,7 @@ public class PickUpController : MonoBehaviour
     public Player player;                           //Variable to reference the Player object
 
     public bool equipped;                           //Checks if weapon is equipped
-    public static bool slotFull;                    //Variable to check if slot is full
+    public bool slotFull;                    //Variable to check if slot is full
 
     /// <summary>
     /// Method to pick up the weapon
