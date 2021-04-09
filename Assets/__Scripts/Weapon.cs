@@ -14,4 +14,14 @@ public class Weapon : MonoBehaviour
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
+    /// <summary>
+    /// Increases the attack damage
+    /// </summary>
+    /// <param name="i"></param>
+    public void increaseAttackDamage(int i)
+    {
+        //Increments attackDamage parameter by the value entered
+        this.attackDamage += i;
+    }
 }

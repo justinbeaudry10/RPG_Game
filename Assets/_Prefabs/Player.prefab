@@ -267,6 +267,9 @@ MonoBehaviour:
   maxExp: 100
   currentHealth: 0
   abilityCooldown: 10
+  moveSpeedIncrement: 0.05
+  meleeAttackIncrement: 2
+  maxHealthIncrement: 5
   groundCheck: {fileID: 2903788333147568185}
   isGrounded: 0
   groundMask:

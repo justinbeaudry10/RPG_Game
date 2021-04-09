@@ -18,16 +18,19 @@ public class Player : MonoBehaviour
     public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
 
     [Header ("Player Properties Settings")]
-    public Rigidbody rig;                                   //References the player's rigidbody
-    public float moveSpeed;                                 //Variable to control the player's movement speed
-    public int maxHealth = 100;                             //The player's maximum health
-    public int maxExp = 10;                                  //The player's maximum experience points
-    public int currentHealth;                               // The player's current health
-    public static int currentExp;                           //The player's experience points
-    public static int currentLevel = 1;                            //The player's current level
-    public int abilityCooldown = 10;                        //Cool down time before using an ability
-    private int fireCooldown, iceCooldown, shieldCooldown;  //Stores the cool down tims for the different types of ablilities
-    private AudioSource playerShootingAudio;                //Variable to reference the audio source for player shooting
+    public Rigidbody rig;                                  //References the player's rigidbody
+    public float moveSpeed;                                //Variable to control the player's movement speed
+    public int maxHealth = 100;                            //The player's maximum health
+    public int maxExp = 10;                                //The player's maximum experience points
+    public int currentHealth;                              // The player's current health
+    public static int currentExp;                          //The player's experience points
+    public static int currentLevel = 1;                    //The player's current level
+    public int abilityCooldown = 10;                       //Cool down time before using an ability
+    private int fireCooldown, iceCooldown, shieldCooldown; //Stores the cool down tims for the different types of ablilities
+    private AudioSource playerShootingAudio;               //Variable to reference the audio source for player shooting
+    public float moveSpeedIncrement;                       //Floating variable to determine speed increase increment upon level up
+    public int meleeAttackIncrement;                     //Floating variable to determine melee attack increase increment upon level up
+    public int maxHealthIncrement;                         //Floating variable to determine max health increase increment upon level up
 
     [Header("Player Jump Settings")]
     public Transform groundCheck;           //References the GroundCheck GO on the player (used to check if player touches the ground)
@@ -445,7 +448,7 @@ public class Player : MonoBehaviour
             int extraExp = currentExp - maxExp;
 
             //Increase the level by 1
-            currentLevel++;
+            LevelUp();
 
             //Make the current exp equal the extra exp
             currentExp = extraExp;
@@ -459,6 +462,26 @@ public class Player : MonoBehaviour
 
         //Update the level text
         levelText.text = "Level " + currentLevel.ToString();
+    }
+
+    /// <summary>
+    /// Method to handling leveling up
+    /// </summary>
+    void LevelUp()
+    {
+        //Increases current level by 1
+        currentLevel++;
+        //Increases max health value by the given increment
+        IncreaseMaxHealth(maxHealthIncrement);
+        // Increases melee damage by given increment;
+        IncreaseMeleeDamage(meleeAttackIncrement);
+        // Increases movement speed by given increment
+        IncreasePlayerMovementSpeed(moveSpeedIncrement);
+
+        //Logging change in console
+        print("Player has levelled up.");
+        print("Current Max Health: " + maxHealth + " Current Melee Attack Damage: " + myWeapon.attackDamage + " Current Movement Speed: " + moveSpeed);
+
     }
 
     /// <summary>
@@ -559,4 +582,46 @@ public class Player : MonoBehaviour
         Destroy(FirePotion);
         Destroy(IcePotion);
     }
+
+    /// <summary>
+    /// Increase max health upon level increase
+    /// </summary>
+    private void IncreaseMaxHealth(int factor)
+    {
+
+        //Get current Max Health
+        int h = maxHealth;
+        //Increase Max Heath Value
+        h += factor;
+
+        this.maxHealth = h;
+        //Reflect changes in the health bar
+        healthBar.SetMaxHealth(maxHealth);
+    }
+
+
+    /// <summary>
+    /// Increases melee attack damage for the player
+    /// </summary>
+    private void IncreaseMeleeDamage(int factor)
+    {
+        //Increase Melee Damage by the given factor
+        this.myWeapon.increaseAttackDamage(factor);
+
+    }
+
+    /// <summary>
+    /// Increases movement speed for the player
+    /// </summary>
+    /// <param name="factor"></param>
+    private void IncreasePlayerMovementSpeed(float factor)
+    {
+        //Get current moveSpeed
+        float ms = this.moveSpeed;
+        //Increasing move speed by the factor
+        ms += factor;
+        this.moveSpeed = ms;
+    }
+    
+
 }
