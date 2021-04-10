@@ -240,10 +240,12 @@ public class Player : MonoBehaviour
     /// Controls the player's jump movement
     /// </summary>
     void Jump()
-    {
+    {;
         //Checks if the player is touching the ground
         //CheckSphere checks if any colliders overlapping the sphere
         isGrounded = Physics.CheckSphere(groundCheck.position, _groundDistance, groundMask);
+
+        print(isGrounded);
 
         //If the player is touching the ground
         if (isGrounded)
