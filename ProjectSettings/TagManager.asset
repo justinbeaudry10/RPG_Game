@@ -12,6 +12,7 @@ TagManager:
   - ShieldPotion
   - IcePotion
   - FirePotion
+  - Hat
   layers:
   - Default
   - TransparentFX

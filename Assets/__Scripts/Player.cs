@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
         StartCoroutine(iceRegen());
         StartCoroutine(shieldRegen());
 
+        //Gets the player's hat material and assigns it
         hatMaterial = playerHat.GetComponent<MeshRenderer>().material;
 
     }
@@ -541,7 +542,10 @@ public class Player : MonoBehaviour
             //Destory the potions
             DestroyPotions();
 
+            //The player's hat is visible
             playerHat.SetActive(true);
+            
+            //Change the hat's colour to red
             hatMaterial.SetColor("_Color", Color.red);
         }
 
@@ -559,7 +563,10 @@ public class Player : MonoBehaviour
             //Destory the potions
             DestroyPotions();
 
+            //The player's hat is visible
             playerHat.SetActive(true);
+
+            //Change the hat's colour to blue
             hatMaterial.SetColor("_Color", Color.blue);
         }
 
@@ -577,8 +584,11 @@ public class Player : MonoBehaviour
             //Destory the potions
             DestroyPotions();
 
+            //The player's hat is visible
             playerHat.SetActive(true);
-            hatMaterial.SetColor("_Color", Color.yellow);
+
+            //Change the hat's colour to green
+            hatMaterial.SetColor("_Color", Color.green);
         }
     }
 
