@@ -33,10 +33,5 @@ public class HealthBar : MonoBehaviour
     {
         // Sets slider's max value to the paramaterized health value
         slider.maxValue = health;
-        // Sets the slider value to the health passed as well
-        slider.value = health;
-
-        // Evaluates gradient when bar is full (gradient is on a 0 to 1 scale)
-        fill.color = gradient.Evaluate(1f);
     }
 }
