@@ -182,7 +182,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Method to attack the player
     /// </summary>
-    public void AttackPlayer()
+    public virtual void AttackPlayer()
     {
         //Stop enemy from moving
         agent.SetDestination(transform.position);
