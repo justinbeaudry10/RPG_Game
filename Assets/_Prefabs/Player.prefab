@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 6474328119132830128}
   - component: {fileID: 6474328119132830135}
   - component: {fileID: 6474328119132830134}
+  - component: {fileID: 2903788333122693372}
   m_Layer: 9
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -113,6 +114,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6474328119132830133}
   m_Enabled: 1
+--- !u!114 &2903788333122693372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474328119132830133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0f8e6c62df475c45bd1021646ff5f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: {fileID: 655388726181300599, guid: 4cec37991128c684ca4ebdc97ffe4ea0, type: 3}
+  enemyCount: 2
 --- !u!1 &6474328119460212785
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +173,7 @@ GameObject:
   - component: {fileID: 6474328120364344652}
   - component: {fileID: 6474328120364344643}
   - component: {fileID: 157162430710735106}
+  - component: {fileID: 311410170}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -265,7 +281,7 @@ MonoBehaviour:
   moveSpeed: 5
   maxHealth: 100
   maxExp: 100
-  currentHealth: 0
+  currentHealth: 100
   abilityCooldown: 10
   moveSpeedIncrement: 0.05
   meleeAttackIncrement: 2
@@ -280,7 +296,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 1024
-  gunPicked: 1
+  gunPicked: 0
 --- !u!114 &157162430710735106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,6 +309,102 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f8f83db70e5444490baa57f0359fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &311410170
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6474328120364344642}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 65201ddabb4144f6a8fb9480120b7656, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.48
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7951710841840317127
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +506,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b0a6df411f5301f4bb27ca7b54539511,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b0a6df411f5301f4bb27ca7b54539511,
         type: 3}
