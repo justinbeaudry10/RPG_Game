@@ -341,6 +341,8 @@ public class Player : MonoBehaviour
                 //If the collider is a regular enemy
                 if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyAI>())
                 {
+                    print("Hit Enemy");
+
                     //Get health of the enemy
                     EnemyAI ehealth = hit.collider.GetComponent<EnemyAI>();
 
@@ -351,6 +353,8 @@ public class Player : MonoBehaviour
                 //If the collider is a shooting enemy
                 else if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyShoot>())
                 {
+                    print("Hit Shooting Enemy");
+
                     //Get the shooting enemy's health
                     EnemyShoot ehealth = hit.collider.GetComponent<EnemyShoot>();
 
