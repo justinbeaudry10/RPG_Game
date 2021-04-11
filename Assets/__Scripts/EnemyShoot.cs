@@ -37,44 +37,6 @@ public class EnemyShoot : EnemyAI
         //Call the parent Update()
         base.Update();
 
-        /*//If the time between shots is less than or equal to 0
-        if (timeBetweenShots <= 0)
-        {
-            //Create a projectile (to shoot)
-            Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);
-            
-            //Play the shooting audio
-            zoombieShootingAudio.Play();
-
-            //The time between shots is the start time between shots
-            timeBetweenShots = startTimeBetweenShots;
-        }
-
-        //If the time between shots is not less than or equal to 0
-        else
-        {
-            //Decrease the time between shots by the difference in time
-            timeBetweenShots -= Time.deltaTime;
-        }*/
-
-        //If the player is in sight and in attack range
-        /*if (playerInSightRange && playerInAttackRange && timeBetweenShots<=0)
-        {
-            //Create a projectile (to shoot)
-            Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);
-
-            //Play the shooting audio
-            zoombieShootingAudio.Play();
-
-            //The time between shots is the start time between shots
-            timeBetweenShots = startTimeBetweenShots;
-        }
-
-        else
-        {
-            //Decrease the time between shots by the difference in time
-            timeBetweenShots -= Time.deltaTime;
-        }*/
     }
 
     public override void AttackPlayer()
