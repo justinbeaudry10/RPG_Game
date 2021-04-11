@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthText, levelText;
     public Camera cam;
     public Weapon myWeapon;
-    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
+    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun, playerHat;
+    private Material hatMaterial;
 
     [Header ("Player Properties Settings")]
     public Rigidbody rig;                                  //References the player's rigidbody
@@ -106,6 +107,9 @@ public class Player : MonoBehaviour
         StartCoroutine(fireRegen());
         StartCoroutine(iceRegen());
         StartCoroutine(shieldRegen());
+
+        hatMaterial = playerHat.GetComponent<MeshRenderer>().material;
+
     }
 
     IEnumerator addHealth()
@@ -536,6 +540,9 @@ public class Player : MonoBehaviour
 
             //Destory the potions
             DestroyPotions();
+
+            playerHat.SetActive(true);
+            hatMaterial.SetColor("_Color", Color.red);
         }
 
         //If the player picks a ice potion
@@ -551,6 +558,9 @@ public class Player : MonoBehaviour
 
             //Destory the potions
             DestroyPotions();
+
+            playerHat.SetActive(true);
+            hatMaterial.SetColor("_Color", Color.blue);
         }
 
         //If the player picks a shield potion
@@ -566,6 +576,9 @@ public class Player : MonoBehaviour
 
             //Destory the potions
             DestroyPotions();
+
+            playerHat.SetActive(true);
+            hatMaterial.SetColor("_Color", Color.yellow);
         }
     }
 
