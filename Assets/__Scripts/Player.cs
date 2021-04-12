@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
     public Camera cam;
     public Weapon myWeapon;
     public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
-    private Material hatMaterial;
+    private static Material hatMaterial;
 
     [Header ("Player Properties Settings")]
     public Rigidbody rig;                                  //References the player's rigidbody
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        /*if (S == null)
+        if (S == null)
         {
             S = this; // Set the Singleton
         }
@@ -63,7 +63,8 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Player.Awake() - Attempted to assign second Player.S!");
         }
-        DontDestroyOnLoad(gameObject);*/
+        
+        /*DontDestroyOnLoad(gameObject);
 
         if (S == null)
         {
@@ -74,7 +75,7 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);*/
     }
 
     private void Start()
