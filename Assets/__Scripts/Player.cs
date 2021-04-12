@@ -15,8 +15,9 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthText, levelText;
     public Camera cam;
     public Weapon myWeapon;
-    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
+    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun, conText;
     private static Material hatMaterial;
+
 
     [Header ("Player Properties Settings")]
     public Rigidbody rig;                                  //References the player's rigidbody
@@ -63,7 +64,7 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Player.Awake() - Attempted to assign second Player.S!");
         }
-        
+
         /*DontDestroyOnLoad(gameObject);
 
         if (S == null)
@@ -76,6 +77,7 @@ public class Player : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this.gameObject);*/
+        conText.SetActive(true);
     }
 
     private void Start()
@@ -329,6 +331,12 @@ public class Player : MonoBehaviour
         {
             //Enable the shield
             EnableShield();
+        }
+
+        //If the context UI object is active and the player presses C 
+        if (conText.activeInHierarchy && Input.GetKeyDown(KeyCode.C))
+        {
+            conText.SetActive(false);
         }
 
     }
