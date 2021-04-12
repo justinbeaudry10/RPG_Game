@@ -29,6 +29,7 @@ public class Main : MonoBehaviour
                 zPos = Random.Range(-30, 50);
                 Instantiate(enemy, new Vector3(xPos, 1, zPos), Quaternion.identity);
             }
+
         }
        
     }

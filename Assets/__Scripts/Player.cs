@@ -77,7 +77,11 @@ public class Player : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(this.gameObject);*/
-        conText.SetActive(true);
+
+        if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            conText.SetActive(true);
+        }
     }
 
     private void Start()
