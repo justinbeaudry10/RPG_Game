@@ -28,7 +28,6 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange;                   //Variables to store the sight range and attack range
     public bool playerInSightRange, playerInAttackRange;    //Variables to check if the player is in sight range or attack range
     public bool onFire = false;                             //Variable to check if enemy is on fire
-    public bool frozen = false;                             //Variable to check if enemy is frozen
     private AudioSource damageAudio;                        //Variable to reference the audio source for player and enemy damage
 
 
@@ -248,7 +247,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Freezing attack
     /// </summary>
-    public void freeze()
+    public virtual void freeze()
     {
         //The enemy's speed is 0
         agent.speed = 0;

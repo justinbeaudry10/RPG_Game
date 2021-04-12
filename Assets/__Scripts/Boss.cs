@@ -7,6 +7,7 @@ public class Boss : EnemyAI
     private bool charging = false;
     public int chargeCooldown = 10;
     public int chargeSpeed, chargeDamage;
+    private bool frozen;
 
     public override void Awake()
     {
@@ -29,26 +30,6 @@ public class Boss : EnemyAI
         //Call the parent Update()
         base.Update();
 
-        if (chargeCooldown == 10)
-        {
-            charging = true;
-        }
-        else
-        {
-            charging = false;
-        }
-            
-    }
-
-    public override void ChasePlayer()
-    {
-        if (charging)
-        {
-            agent.speed = chargeSpeed;
-            Invoke("StopCharge", 3);
-        }
-
-        base.ChasePlayer();
     }
 
     public override void AttackPlayer()
@@ -64,32 +45,18 @@ public class Boss : EnemyAI
 
         base.AttackPlayer();
 
-        /*
-        if (timeBetweenShots <= 0)
-        {
-            //Create a projectile (to shoot)
-            Instantiate(projectile, transform.position + transform.forward * 2.5f, Quaternion.identity);
-
-            //Play the shooting audio
-            zoombieShootingAudio.Play();
-
-            //The time between shots is the start time between shots
-            timeBetweenShots = startTimeBetweenShots;
-        }
-
-        //If the time between shots is not less than or equal to 0
-        else
-        {
-            //Decrease the time between shots by the difference in time
-            timeBetweenShots -= Time.deltaTime;
-        }
-        */
     }
 
-    void StopCharge()
+    public override void freeze()
     {
-        agent.speed = 1;
-        chargeCooldown = 0;
+        frozen = true;
+        base.freeze();
+        Invoke("UnFreeze", 3);
+    }
+
+    public void UnFreeze()
+    {
+        frozen = false;
     }
 
     IEnumerator recharge()
@@ -98,13 +65,20 @@ public class Boss : EnemyAI
         {
             if(chargeCooldown < 10)
             {
-                chargeCooldown++;
-
+                charging = false;
+                if (!frozen)
+                {
+                    chargeCooldown++;
+                    agent.speed = 1;
+                }
                 yield return new WaitForSeconds(1);
             }
-            else
+            else if(chargeCooldown == 10)
             {
-                yield return null;
+                chargeCooldown = 0;
+                agent.speed = 10;
+                charging = true;
+                yield return new WaitForSeconds(3);
             }
         }
     }
