@@ -279,7 +279,7 @@ MonoBehaviour:
     type: 3}
   handGun: {fileID: 6416782695981097019, guid: ef89b95b953a70c429c70dcfdcf84ca2, type: 3}
   rig: {fileID: 6474328120364344653}
-  moveSpeed: 5
+  moveSpeed: 10
   maxHealth: 100
   maxExp: 100
   currentHealth: 100
@@ -544,6 +544,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1526964690268444965, guid: b0a6df411f5301f4bb27ca7b54539511,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb4bd4f421fd1604daf8203bc3c1f20e, type: 2}
     - target: {fileID: 919132149155446097, guid: b0a6df411f5301f4bb27ca7b54539511,
         type: 3}
       propertyPath: m_Name
@@ -571,7 +576,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 290f57b34312fbf448d3b8ca6b6bd41d, type: 3}
       propertyPath: m_Name
-      value: Sombrero
+      value: PlayerHat
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 290f57b34312fbf448d3b8ca6b6bd41d, type: 3}
       propertyPath: m_IsActive

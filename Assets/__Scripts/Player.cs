@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI healthText, levelText;
     public Camera cam;
     public Weapon myWeapon;
-    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun, playerHat;
+    public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun;
     private Material hatMaterial;
 
     [Header ("Player Properties Settings")]
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     public float moveSpeed;                                //Variable to control the player's movement speed
     public int maxHealth = 100;                            //The player's maximum health
     public int maxExp = 10;                                //The player's maximum experience points
-    public int currentHealth;                              // The player's current health
+    public static int currentHealth;                              // The player's current health
     public static int currentExp;                          //The player's experience points
     public static int currentLevel = 1;                    //The player's current level
     public int abilityCooldown = 10;                       //Cool down time before using an ability
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (S == null)
+        /*if (S == null)
         {
             S = this; // Set the Singleton
         }
@@ -63,6 +63,18 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Player.Awake() - Attempted to assign second Player.S!");
         }
+        DontDestroyOnLoad(gameObject);*/
+
+        if (S == null)
+        {
+            S = this; // Set the Singleton
+        }
+        else if (S!=this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
@@ -109,7 +121,8 @@ public class Player : MonoBehaviour
         StartCoroutine(shieldRegen());
 
         //Gets the player's hat material and assigns it
-        hatMaterial = playerHat.GetComponent<MeshRenderer>().material;
+        //hatMaterial = playerHat.GetComponent<MeshRenderer>().material;
+        hatMaterial = gameObject.transform.GetChild(5).gameObject.GetComponent<MeshRenderer>().material;
 
     }
 
@@ -548,7 +561,7 @@ public class Player : MonoBehaviour
             DestroyPotions();
 
             //The player's hat is visible
-            playerHat.SetActive(true);
+            gameObject.transform.GetChild(5).gameObject.SetActive(true);
             
             //Change the hat's colour to red
             hatMaterial.SetColor("_Color", Color.red);
@@ -569,7 +582,7 @@ public class Player : MonoBehaviour
             DestroyPotions();
 
             //The player's hat is visible
-            playerHat.SetActive(true);
+            gameObject.transform.GetChild(5).gameObject.SetActive(true);
 
             //Change the hat's colour to blue
             hatMaterial.SetColor("_Color", Color.blue);
@@ -590,7 +603,7 @@ public class Player : MonoBehaviour
             DestroyPotions();
 
             //The player's hat is visible
-            playerHat.SetActive(true);
+            gameObject.transform.GetChild(5).gameObject.SetActive(true);
 
             //Change the hat's colour to green
             hatMaterial.SetColor("_Color", Color.green);
