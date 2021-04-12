@@ -20,13 +20,17 @@ public class Main : MonoBehaviour
 
     private void Start()
     {
-        // Spawning enemies
-        for(int enemies = 0; enemies < enemyCount; enemies++)
+        if(SceneManager.GetActiveScene().name == "Level1")
         {
-            xPos = Random.Range(-10, 0);
-            zPos = Random.Range(-30, 50);
-            Instantiate(enemy, new Vector3(xPos, 1, zPos), Quaternion.identity);
+            // Spawning enemies
+            for (int enemies = 0; enemies < enemyCount; enemies++)
+            {
+                xPos = Random.Range(-10, 0);
+                zPos = Random.Range(-30, 50);
+                Instantiate(enemy, new Vector3(xPos, 1, zPos), Quaternion.identity);
+            }
         }
+       
     }
     /// <summary>
     /// Method to restart the game

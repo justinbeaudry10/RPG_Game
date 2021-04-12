@@ -29,7 +29,7 @@ public class EnemyAI : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;    //Variables to check if the player is in sight range or attack range
     public bool onFire = false;                             //Variable to check if enemy is on fire
     public bool frozen = false;                             //Variable to check if enemy is frozen
-    private AudioSource damageAudio;                        //Variable to reference the audio source for player damage
+    private AudioSource damageAudio;                        //Variable to reference the audio source for player and enemy damage
 
 
     public virtual void Awake()
@@ -173,7 +173,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Method to chase the player
     /// </summary>
-    public void ChasePlayer()
+    public virtual void ChasePlayer()
     {
         //Move towards the player
         agent.SetDestination(playerTransform.position);
@@ -235,7 +235,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Decrease the health by damage
         health -= damage;
-
+        print(health);
         //If the health is less than 0
         if (health <= 0)
         {
