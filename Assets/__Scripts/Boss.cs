@@ -8,6 +8,8 @@ public class Boss : EnemyAI
     public int chargeCooldown = 10;
     public int chargeSpeed, chargeDamage;
     private bool frozen;
+    public GameObject key;
+
 
     public override void Awake()
     {
@@ -92,5 +94,12 @@ public class Boss : EnemyAI
                 yield return new WaitForSeconds(3);
             }
         }
+    }
+
+    //Called upon destruction of Boss gO
+    private void OnDestroy()
+    {
+        //Instantiates the key in its place of death
+        Instantiate(key, transform.position, key.transform.rotation);      
     }
 }

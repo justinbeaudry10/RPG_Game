@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun, conText;
     public static GameObject playerHat;                     //References the player's hat
     private static Material hatMaterial;                    //References the player's hat material
+    public static bool hasKey = false;                              //Indicates whether or not the player has the key on them
 
 
     [Header ("Player Properties Settings")]
@@ -126,6 +127,9 @@ public class Player : MonoBehaviour
 
         //The gun is not equipped
         PickUpController.equipped = false;
+
+        //Player does not have key on them
+        hasKey = false;
 
     }
 
