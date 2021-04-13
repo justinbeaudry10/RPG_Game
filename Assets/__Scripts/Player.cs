@@ -22,18 +22,18 @@ public class Player : MonoBehaviour
 
     [Header ("Player Properties Settings")]
     public Rigidbody rig;                                  //References the player's rigidbody
-    public float moveSpeed;                                //Variable to control the player's movement speed
-    public int maxHealth = 100;                            //The player's maximum health
-    public int maxExp = 10;                                //The player's maximum experience points
+    public static float moveSpeed = 5;                                //Variable to control the player's movement speed
+    public static int maxHealth = 100;                            //The player's maximum health
+    public static int maxExp = 100;                                //The player's maximum experience points
     public static int currentHealth;                              // The player's current health
     public static int currentExp;                          //The player's experience points
     public static int currentLevel = 1;                    //The player's current level
     public int abilityCooldown = 10;                       //Cool down time before using an ability
     private int fireCooldown, iceCooldown, shieldCooldown; //Stores the cool down tims for the different types of ablilities
     private AudioSource playerShootingAudio;               //Variable to reference the audio source for player shooting
-    public float moveSpeedIncrement;                       //Floating variable to determine speed increase increment upon level up
-    public int meleeAttackIncrement;                     //Floating variable to determine melee attack increase increment upon level up
-    public int maxHealthIncrement;                         //Floating variable to determine max health increase increment upon level up
+    public static float moveSpeedIncrement = 1;                       //Floating variable to determine speed increase increment upon level up
+    public static int meleeAttackIncrement = 5;                     //Floating variable to determine melee attack increase increment upon level up
+    public static int maxHealthIncrement = 10;                         //Floating variable to determine max health increase increment upon level up
 
     [Header("Player Jump Settings")]
     public Transform groundCheck;           //References the GroundCheck GO on the player (used to check if player touches the ground)
@@ -70,7 +70,9 @@ public class Player : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Level1")
         {
             conText.SetActive(true);
+            Weapon.attackDamage = 20;
         }
+
     }
 
     private void Start()
@@ -397,30 +399,26 @@ public class Player : MonoBehaviour
             RaycastHit hit;
 
             //If the raycast hits something withing the range
-            if (Physics.Raycast(ray, out hit, myWeapon.attackDamage))
+            if (Physics.Raycast(ray, out hit, Weapon.attackDamage))
             {
                 //If the collider is a regular enemy
                 if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyAI>())
                 {
-                    print("Hit Enemy");
-
                     //Get health of the enemy
                     EnemyAI ehealth = hit.collider.GetComponent<EnemyAI>();
 
                     //Reduce the enemy's health
-                    ehealth.TakeDamage(myWeapon.attackDamage);
+                    ehealth.TakeDamage(Weapon.attackDamage);
                 }
 
                 //If the collider is a shooting enemy
                 else if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyShoot>())
                 {
-                    print("Hit Shooting Enemy");
-
                     //Get the shooting enemy's health
                     EnemyShoot ehealth = hit.collider.GetComponent<EnemyShoot>();
 
                     //Reduce the shooting enemy's health
-                    ehealth.TakeDamage(myWeapon.attackDamage);
+                    ehealth.TakeDamage(Weapon.attackDamage);
                 }
             }
         }
@@ -552,7 +550,7 @@ public class Player : MonoBehaviour
 
         //Logging change in console
         print("Player has levelled up.");
-        print("Current Max Health: " + maxHealth + " Current Melee Attack Damage: " + myWeapon.attackDamage + " Current Movement Speed: " + moveSpeed);
+        print("Current Max Health: " + maxHealth + " Current Melee Attack Damage: " + Weapon.attackDamage + " Current Movement Speed: " + moveSpeed);
 
     }
 
@@ -596,8 +594,6 @@ public class Player : MonoBehaviour
         //If the player picks a fire potion
         if (coll.CompareTag("FirePotion"))
         {
-            print("Player has chosen fire potion");
-
             //Enable the fire class
             fireClass = true;
 
@@ -617,8 +613,6 @@ public class Player : MonoBehaviour
         //If the player picks a ice potion
         else if (coll.CompareTag("IcePotion"))
         {
-            print("Player has chosen ice potion");
-
             //Enable the ice class
             iceClass = true;
 
@@ -638,8 +632,6 @@ public class Player : MonoBehaviour
         //If the player picks a shield potion
         else if (coll.CompareTag("ShieldPotion"))
         {
-            print("Player has chosen shield potion");
-
             //Enable the shield class 
             shieldClass = true;
 
@@ -679,12 +671,8 @@ public class Player : MonoBehaviour
     private void IncreaseMaxHealth(int factor)
     {
 
-        //Get current Max Health
-        int h = maxHealth;
-        //Increase Max Heath Value
-        h += factor;
+        maxHealth += factor;
 
-        this.maxHealth = h;
         //Reflect changes in the health bar
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -696,7 +684,7 @@ public class Player : MonoBehaviour
     private void IncreaseMeleeDamage(int factor)
     {
         //Increase Melee Damage by the given factor
-        this.myWeapon.increaseAttackDamage(factor);
+        myWeapon.increaseAttackDamage(factor);
 
     }
 
@@ -706,11 +694,7 @@ public class Player : MonoBehaviour
     /// <param name="factor"></param>
     private void IncreasePlayerMovementSpeed(float factor)
     {
-        //Get current moveSpeed
-        float ms = this.moveSpeed;
-        //Increasing move speed by the factor
-        ms += factor;
-        this.moveSpeed = ms;
+        moveSpeed += factor;
     }
     
 

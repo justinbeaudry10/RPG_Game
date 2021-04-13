@@ -22,7 +22,7 @@ public class PlayerAnimator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float speedPercent = rb.velocity.magnitude / player.moveSpeed;
+        float speedPercent = rb.velocity.magnitude / Player.moveSpeed;
         animator.SetFloat("speedPercent", 0.5f * speedPercent, locomotionAnimationSmoothTime, Time.deltaTime);
     }
 }

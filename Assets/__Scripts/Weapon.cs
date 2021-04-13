@@ -5,7 +5,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     //Weapon attributes (IN PROGRESS FOR MULTIPLE WEAPONS)
-    public int attackDamage;
+    public static  int attackDamage;
     public float attackRange;
     public float attackCoolDown;
 
@@ -22,6 +22,6 @@ public class Weapon : MonoBehaviour
     public void increaseAttackDamage(int i)
     {
         //Increments attackDamage parameter by the value entered
-        this.attackDamage += i;
+        attackDamage += i;
     }
 }

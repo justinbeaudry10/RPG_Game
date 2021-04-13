@@ -88,6 +88,11 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+    public virtual void SetOnFire()
+    {
+        onFire = true;
+    }
+
     /// <summary>
     /// Burning attack
     /// </summary>
@@ -234,7 +239,9 @@ public class EnemyAI : MonoBehaviour
     {
         //Decrease the health by damage
         health -= damage;
+
         print(health);
+
         //If the health is less than 0
         if (health <= 0)
         {

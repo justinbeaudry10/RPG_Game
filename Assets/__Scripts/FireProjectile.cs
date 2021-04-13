@@ -22,7 +22,7 @@ public class FireProjectile : ProjectilePlayer
             // Setting an enemy as a local variable
             enemy = other.gameObject.GetComponent<EnemyAI>();
             // Sets the enemy "on fire"
-            enemy.onFire = true;
+            enemy.SetOnFire();
             // Does 25 damage to the enemy
             enemy.TakeDamage(25);
             // Destroys the fire projectile

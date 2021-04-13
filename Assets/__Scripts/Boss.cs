@@ -47,6 +47,17 @@ public class Boss : EnemyAI
 
     }
 
+    public override void SetOnFire()
+    {
+        base.SetOnFire();
+        Invoke("StopBurning", 5);
+    }
+
+    public void StopBurning()
+    {
+        onFire = false;
+    }
+
     public override void freeze()
     {
         frozen = true;
