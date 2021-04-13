@@ -39,6 +39,14 @@ public class ProjectilePlayer : MonoBehaviour
     {
         //Move the projectile foward with respect to speed and time
         transform.position += transform.forward * speed * Time.deltaTime;
+
+        //If projectile is past the boundries
+        //CURRENTLY COMMENTED OUT BECAUSE INTERFERES WITH LEVEL 2 BOUNDRIES
+        /*if (transform.position.z > 90 || transform.position.z < -55 || transform.position.x > 40 || transform.position.x < -55 || transform.position.y > 50 || transform.position.y < -1)
+        {
+            //Destory the projectile
+            Destroy(gameObject);
+        }*/
     }
 
     private void OnTriggerEnter(Collider other)

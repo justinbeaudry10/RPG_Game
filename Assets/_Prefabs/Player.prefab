@@ -278,11 +278,11 @@ MonoBehaviour:
   iceBullet: {fileID: 2669793610928777350, guid: d191951e68af5194aa9ae29fc525c707,
     type: 3}
   handGun: {fileID: 6416782695981097019, guid: ef89b95b953a70c429c70dcfdcf84ca2, type: 3}
+  conText: {fileID: 0}
   rig: {fileID: 6474328120364344653}
   moveSpeed: 10
   maxHealth: 100
   maxExp: 100
-  currentHealth: 100
   abilityCooldown: 10
   moveSpeedIncrement: 0.05
   meleeAttackIncrement: 2
@@ -297,7 +297,6 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 1024
-  gunPicked: 0
 --- !u!114 &157162430710735106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,6 +460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7688396142740656909}
+  - component: {fileID: 6543195635929171851}
   m_Layer: 0
   m_Name: GunContainer
   m_TagString: Untagged
@@ -482,6 +482,18 @@ Transform:
   m_Father: {fileID: 6474328120364344655}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &6543195635929171851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8493384815994292312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bbdb38db2acf9c419cf3b320044bcb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2539970737837868259
 PrefabInstance:
   m_ObjectHideFlags: 0

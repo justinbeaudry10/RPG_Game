@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
     public Camera cam;
     public Weapon myWeapon;
     public GameObject crossHair, deathText, hand, projectile, playerProjectile, fireBullet, iceBullet, handGun, conText;
-    private static Material hatMaterial;
+    public static GameObject playerHat;                     //References the player's hat
+    private static Material hatMaterial;                    //References the player's hat material
 
 
     [Header ("Player Properties Settings")]
@@ -51,7 +52,8 @@ public class Player : MonoBehaviour
     public float meleeAttackRange;
     public bool playerInMeleeAttackRange;
     public LayerMask whatIsEnemy;           //References the layer for enemies
-    public bool gunPicked = false;
+    public static bool gunInInventory;      //Checks if player has gun in inventory
+
 
 
     private void Awake()
@@ -64,19 +66,6 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Player.Awake() - Attempted to assign second Player.S!");
         }
-
-        /*DontDestroyOnLoad(gameObject);
-
-        if (S == null)
-        {
-            S = this; // Set the Singleton
-        }
-        else if (S!=this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(this.gameObject);*/
 
         if (SceneManager.GetActiveScene().name == "Level1")
         {
@@ -128,8 +117,13 @@ public class Player : MonoBehaviour
         StartCoroutine(shieldRegen());
 
         //Gets the player's hat material and assigns it
-        //hatMaterial = playerHat.GetComponent<MeshRenderer>().material;
         hatMaterial = gameObject.transform.GetChild(5).gameObject.GetComponent<MeshRenderer>().material;
+
+        //Gets the player's hat and assigns it
+        playerHat = gameObject.transform.GetChild(5).gameObject;
+
+        //The gun is not equipped
+        PickUpController.equipped = false;
 
     }
 
@@ -308,7 +302,7 @@ public class Player : MonoBehaviour
         }
 
         //If the player right-clicks the mouse and the cool down is done and the gun is picked
-        if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown && gunPicked)
+        if (Input.GetMouseButtonUp(1) && attackTimer >= myWeapon.attackCoolDown && PickUpController.equipped)
         {
             //Shoot bullets
             Shoot();
@@ -341,6 +335,46 @@ public class Player : MonoBehaviour
         if (conText.activeInHierarchy && Input.GetKeyDown(KeyCode.C))
         {
             conText.SetActive(false);
+        }
+
+        //If the fire class is chosen and the player hat is not active
+        if (fireClass && playerHat.activeSelf == false)
+        {
+            //The player hat is active
+            playerHat.SetActive(true);
+
+            //Change the hat's colour to red
+            hatMaterial.SetColor("_Color", Color.red);
+        }
+
+        //If the ice class is chosen and the player hat is not active
+        else if (iceClass && playerHat.activeSelf == false)
+        {
+            //The player hat is active
+            playerHat.SetActive(true);
+
+            //Change the hat's colour to blue
+            hatMaterial.SetColor("_Color", Color.blue);
+        }
+
+        //If the shield class is chosen and the player hat is not active
+        else if (shieldClass && playerHat.activeSelf == false)
+        {
+            //The player hat is active
+            playerHat.SetActive(true);
+
+            //Change the hat's colour to gren
+            hatMaterial.SetColor("_Color", Color.green);
+        }
+
+        //If the player has the gun in inventory and the gun container has no children (no hand gun)
+        if (gunInInventory && transform.Find("GunContainer").childCount == 0)
+        {
+            //Create a hand gun game object and instantiate it
+            GameObject handGunPrefab = Instantiate(handGun, transform.Find("GunContainer").position, Quaternion.identity);
+
+            //Make the hand gun a child of the gun container
+            handGunPrefab.transform.parent = transform.Find("GunContainer");
         }
 
     }
@@ -574,8 +608,8 @@ public class Player : MonoBehaviour
             DestroyPotions();
 
             //The player's hat is visible
-            gameObject.transform.GetChild(5).gameObject.SetActive(true);
-            
+            playerHat.SetActive(true);
+
             //Change the hat's colour to red
             hatMaterial.SetColor("_Color", Color.red);
         }
@@ -595,7 +629,7 @@ public class Player : MonoBehaviour
             DestroyPotions();
 
             //The player's hat is visible
-            gameObject.transform.GetChild(5).gameObject.SetActive(true);
+            playerHat.SetActive(true);
 
             //Change the hat's colour to blue
             hatMaterial.SetColor("_Color", Color.blue);
@@ -616,7 +650,7 @@ public class Player : MonoBehaviour
             DestroyPotions();
 
             //The player's hat is visible
-            gameObject.transform.GetChild(5).gameObject.SetActive(true);
+            playerHat.SetActive(true);
 
             //Change the hat's colour to green
             hatMaterial.SetColor("_Color", Color.green);

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PickUpController : MonoBehaviour
 {
-    public HandGun gunScript;               //Reference the gunScript
     public Rigidbody rb;                    //Reference the pickups rigidbody
     public BoxCollider coll;                //Reference the pickups collider
     public Transform playerTransform, gunContainer, cam;    //Reference the player, gun container and camera
@@ -15,8 +14,8 @@ public class PickUpController : MonoBehaviour
     public LayerMask whatIsPlayer;                  //Variables to reference the player layers
     public Player player;                           //Variable to reference the Player object
 
-    public bool equipped;                           //Checks if weapon is equipped
-    public bool slotFull;                    //Variable to check if slot is full
+    public static bool equipped;                    //Checks if weapon is currently equipped
+    public static bool slotFull;                    //Variable to check if slot is full (player has in inventory)
 
     /// <summary>
     /// Method to pick up the weapon
@@ -28,6 +27,10 @@ public class PickUpController : MonoBehaviour
 
         //The slot is full
         slotFull = true;
+
+        //The player has the gun picked and in inventory
+        Player.gunInInventory = true;
+        print("Player picked up gun");
 
         //Set the parent of the weapon to the gun container on the player game object
         transform.SetParent(gunContainer);
@@ -41,18 +44,11 @@ public class PickUpController : MonoBehaviour
         rb.isKinematic = true;
         coll.isTrigger = true;
 
-        //The player has the gun picked
-        player.gunPicked = true;
-        print("Player picked up gun");
-
         //Stop the sparkle effect
         for (int i = 3; i < 7; i++)
         {
             gameObject.transform.GetChild(i).gameObject.SetActive(false);
         }
-
-        //Enable script
-        gunScript.enabled = true;
     }
 
     /// <summary>
@@ -73,8 +69,8 @@ public class PickUpController : MonoBehaviour
         rb.isKinematic = false;
         coll.isTrigger = false;
 
-        //The player doesn't have the gun picked
-        player.gunPicked = false;
+        //The player doesn't have the gun in inventory (dropped the gun)
+        Player.gunInInventory = false;
         print("Player dropped up gun");
 
         //Play the sparkle effect
@@ -82,9 +78,6 @@ public class PickUpController : MonoBehaviour
         {
             gameObject.transform.GetChild(i).gameObject.SetActive(true);
         }
-
-        //Disable script
-        gunScript.enabled = false;
 
         //Make the weapons velocity equal the player's velocity
         rb.velocity = playerTransform.GetComponent<Rigidbody>().velocity;
@@ -102,33 +95,62 @@ public class PickUpController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //If the weapon is not equipped
-        if(!equipped)
+        //If the player has the gun in inventory (used for when level 2 starts)
+        if (Player.gunInInventory)
         {
-            //Disable the script
-            gunScript.enabled = false;
+            //Create and initalize the player game object
+            GameObject playerGO = GameObject.Find("Player");
 
-            //Make rigidbody kinematic and box collider a trigger
-            rb.isKinematic = false;
-            coll.isTrigger = false;
+            //Initalize the player object
+            player = GameObject.Find("Player").GetComponent<Player>();
+
+            //Initalize the player transform
+            playerTransform = playerGO.transform;
+
+            //Initalize the gun container transform
+            gunContainer = playerGO.transform.Find("GunContainer");
+
+            //Initalize the cam transform
+            cam = playerGO.transform.Find("CameraAnchor").Find("Main Camera");
+
+            //The player picks up the gun
+            PickUp();
+
+            //The gun is equipped
+            equipped = true;
         }
 
-        //If the weapon is equipped
-        if (equipped)
+        //If the player doesn't have the gun in inventory (when level 1 starts or if player never picked up a gun)
+        else
         {
-            //Enable the script
-            gunScript.enabled = true;
+            //If the weapon is not equipped
+            if (!equipped)
+            {
+                //Disable the script
+                //gunScript.enabled = false;
 
-            //Make rigidbody kinematic and box collider a trigger
-            rb.isKinematic = true;
-            coll.isTrigger = true;
+                //Make rigidbody kinematic and box collider a trigger
+                rb.isKinematic = false;
+                coll.isTrigger = false;
+            }
 
-            //The slot is full
-            slotFull = true;
+            //If the weapon is equipped
+            if (equipped)
+            {
+                //Enable the script
+                //gunScript.enabled = true;
+
+                //Make rigidbody kinematic and box collider a trigger
+                rb.isKinematic = true;
+                coll.isTrigger = true;
+
+                //The slot is full
+                slotFull = true;
+            }
+
+            //Assign the player object
+            player = playerTransform.gameObject.GetComponent<Player>();
         }
-
-        //Assign the player object
-        player = playerTransform.gameObject.GetComponent<Player>();
 
     }
 
