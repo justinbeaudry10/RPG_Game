@@ -38,7 +38,10 @@ public class Main : MonoBehaviour
     /// </summary>
     public void Restart()
     {
+        Player.gunInInventory = false;
+        PickUpController.equipped = false;
+        PickUpController.slotFull = false;
         //Reload the Scene
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level1");     
     }
 }

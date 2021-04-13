@@ -30,8 +30,6 @@ public class PickUpController : MonoBehaviour
 
         //The player has the gun picked and in inventory
         Player.gunInInventory = true;
-        print("Player picked up gun");
-
         //Set the parent of the weapon to the gun container on the player game object
         transform.SetParent(gunContainer);
 
