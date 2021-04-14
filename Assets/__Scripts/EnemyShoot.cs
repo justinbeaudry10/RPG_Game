@@ -12,6 +12,8 @@ public class EnemyShoot : EnemyAI
     public float startTimeBetweenShots;             //Stores the start time for attack between shots
     private AudioSource zoombieShootingAudio;       //Variable to reference the audio source for enemy shooting
 
+    private bool frozen = false;
+
     public override void Awake()
     {
         //Call the parent Awake()
@@ -36,11 +38,23 @@ public class EnemyShoot : EnemyAI
     {
         //Call the parent Update()
         base.Update();
+    }
 
+    public override void freeze()
+    {
+        frozen = true;
+    }
+
+    public override void ChasePlayer()
+    {
+        transform.LookAt(playerTransform);
     }
 
     public override void AttackPlayer()
     {
+        //Make the enemy look at the player
+        transform.LookAt(playerTransform);
+
         if (timeBetweenShots <= 0)
         {
             //Create a projectile (to shoot)
@@ -52,9 +66,8 @@ public class EnemyShoot : EnemyAI
             //The time between shots is the start time between shots
             timeBetweenShots = startTimeBetweenShots;
         }
-
         //If the time between shots is not less than or equal to 0
-        else
+        else if(!frozen)
         {
             //Decrease the time between shots by the difference in time
             timeBetweenShots -= Time.deltaTime;
