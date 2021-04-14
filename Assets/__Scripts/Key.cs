@@ -5,10 +5,11 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
     //Detects collision with game objects
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
+        print("Coll w key");
         //Detects collision with player
-        if (other.gameObject.tag == "Player")
+        if (other.CompareTag("Player"))
         {
             //Changes the hasKey boolean to variable to true
             Player.hasKey = true;

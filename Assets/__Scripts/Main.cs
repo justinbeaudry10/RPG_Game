@@ -26,7 +26,7 @@ public class Main : MonoBehaviour
             for (int enemies = 0; enemies < enemyCount; enemies++)
             {
                 xPos = Random.Range(-10, 0);
-                zPos = Random.Range(-30, 50);
+                zPos = Random.Range(-20, 50);
                 Instantiate(enemy, new Vector3(xPos, 1, zPos), Quaternion.identity);
             }
 

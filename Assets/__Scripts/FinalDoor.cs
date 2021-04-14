@@ -5,10 +5,10 @@ using UnityEngine;
 public class FinalDoor : MonoBehaviour
 {
     //Detects collision with game objects
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
         //If the collided object is a player and the player has the key on them
-        if ((other.gameObject.tag == "Player")&& (Player.hasKey))
+        if (other.CompareTag("Player") && Player.hasKey)
         {
             //Door gets destroyed
             Destroy(gameObject);

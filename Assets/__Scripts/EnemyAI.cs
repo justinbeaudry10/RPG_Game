@@ -240,8 +240,6 @@ public class EnemyAI : MonoBehaviour
         //Decrease the health by damage
         health -= damage;
 
-        print(health);
-
         //If the health is less than 0
         if (health <= 0)
         {
