@@ -20,10 +20,9 @@ public class Player : MonoBehaviour
     private static Material hatMaterial;                    //References the player's hat material
     public static bool hasKey = false;                              //Indicates whether or not the player has the key on them
 
-
     [Header ("Player Properties Settings")]
     public Rigidbody rig;                                  //References the player's rigidbody
-    public static float moveSpeed = 10;                                //Variable to control the player's movement speed
+    public static float moveSpeed = 5;                                //Variable to control the player's movement speed
     public static int maxHealth = 100;                            //The player's maximum health
     public static int maxExp = 100;                                //The player's maximum experience points
     public static int currentHealth;                              // The player's current health
@@ -130,7 +129,7 @@ public class Player : MonoBehaviour
 
         //Player does not have key on them
         hasKey = false;
-
+        
     }
 
     IEnumerator addHealth()
@@ -704,6 +703,6 @@ public class Player : MonoBehaviour
     {
         moveSpeed += factor;
     }
-    
 
+    
 }
