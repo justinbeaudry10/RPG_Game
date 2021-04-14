@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     [Header ("Player Properties Settings")]
     public Rigidbody rig;                                  //References the player's rigidbody
-    public static float moveSpeed = 5;                                //Variable to control the player's movement speed
+    public static float moveSpeed = 10;                                //Variable to control the player's movement speed
     public static int maxHealth = 100;                            //The player's maximum health
     public static int maxExp = 100;                                //The player's maximum experience points
     public static int currentHealth;                              // The player's current health
@@ -408,6 +408,8 @@ public class Player : MonoBehaviour
                 //If the collider is a regular enemy
                 if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyAI>())
                 {
+                    print("Hit Enemy");
+
                     //Get health of the enemy
                     EnemyAI ehealth = hit.collider.GetComponent<EnemyAI>();
 
@@ -418,6 +420,8 @@ public class Player : MonoBehaviour
                 //If the collider is a shooting enemy
                 else if (hit.collider.tag == "Enemy" && hit.collider.GetComponent<EnemyShoot>())
                 {
+                    print("Hit Enemy");
+
                     //Get the shooting enemy's health
                     EnemyShoot ehealth = hit.collider.GetComponent<EnemyShoot>();
 

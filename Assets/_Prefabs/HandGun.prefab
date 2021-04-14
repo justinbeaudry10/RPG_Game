@@ -19153,7 +19153,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6420832003506815023}
   - component: {fileID: -4679832828909900983}
-  - component: {fileID: -1268123783764879836}
   - component: {fileID: -9118083376001808124}
   - component: {fileID: -2415597831943436125}
   - component: {fileID: 856410384}
@@ -19197,7 +19196,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a01c14a0ab18d9488defe496bc56513, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunScript: {fileID: -1268123783764879836}
   rb: {fileID: -9118083376001808124}
   coll: {fileID: -2415597831943436125}
   playerTransform: {fileID: 0}
@@ -19211,21 +19209,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   player: {fileID: 0}
---- !u!114 &-1268123783764879836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6416782695981097019}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d037b73dca332e940ada3e315b38eea2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  range: 100
-  fpsCam: {fileID: 0}
 --- !u!54 &-9118083376001808124
 Rigidbody:
   m_ObjectHideFlags: 0
