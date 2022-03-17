@@ -256,6 +256,7 @@ public class Player : MonoBehaviour
         shieldClass = false;
         currentExp = 0;
         currentLevel = 1;
+        maxHealth = 100;
 
         //Restart the game
         Main.S.Restart();
